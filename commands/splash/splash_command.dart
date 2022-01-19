@@ -10,7 +10,7 @@ import 'ios/ios_splash_controller.dart';
 class SplashCommand extends BaseCommand<SplashCommand> {
 
   @override
-  String? get description => 'Generate splash screen for your project';
+  String? get description => 'Generate native splash screen';
 
   @override
   Future<void> executionBlock() async {
