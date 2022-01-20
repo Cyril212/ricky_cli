@@ -6,6 +6,7 @@ import '../../../core/models/icon_template_model.dart';
 import '../../../utils/app_image_utils.dart';
 import '../base_splash_controller.dart';
 import '../../../core/constants.dart';
+import '../../../core/logger.dart';
 
 class FlutterSplashController extends BaseSplashController<FlutterTemplateModel> {
   FlutterSplashController() : super('');
@@ -27,11 +28,11 @@ class FlutterSplashController extends BaseSplashController<FlutterTemplateModel>
 
   @override
   void generateSplashLogo() {
-    print('[Flutter] Creating ' + (hasDarkMode ? 'dark mode ' : '') + 'splash images');
+    Logger.debug(message: '[Flutter] Creating splash images');
 
     final image = decodeImage(File(sourceImagePath).readAsBytesSync());
     if (image == null) {
-      print('The file $sourceImagePath could not be read.');
+      Logger.error(message: 'The file $sourceImagePath could not be read.');
       exit(1);
     }
     for (var template in splashIconList) {

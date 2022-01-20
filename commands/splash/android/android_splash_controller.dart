@@ -4,6 +4,8 @@ import 'package:image/image.dart';
 import 'package:xml/xml.dart';
 
 import '../../../core/models/icon_template_model.dart';
+import '../../../core/logger.dart';
+
 import 'android_version.dart';
 import '../../../utils/app_image_utils.dart';
 import '../base_splash_controller.dart';
@@ -110,7 +112,7 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
 
     final image = decodeImage(File(sourceImagePath).readAsBytesSync());
     if (image == null) {
-      print('The file $sourceImagePath could not be read.');
+      Logger.error(message: 'The file $sourceImagePath could not be read.');
       exit(1);
     }
 

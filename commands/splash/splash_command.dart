@@ -4,11 +4,11 @@ import 'android/android_splash_controller.dart';
 import 'package:cli_dialog/cli_dialog.dart';
 import '../../utils/find_file/find_folder_by_directory.dart';
 import '../../core/base_command.dart';
+import '../../core/logger.dart';
 
 import 'ios/ios_splash_controller.dart';
 
 class SplashCommand extends BaseCommand<SplashCommand> {
-
   @override
   String? get description => 'Generate native splash screen';
 
@@ -21,15 +21,15 @@ class SplashCommand extends BaseCommand<SplashCommand> {
 
     final dialogAnswers = dialog.ask();
     if (dialogAnswers['isInRoot'] != 'y') {
-      print('Make sure, you are in root folder and try it out later!');
+      Logger.error(message: 'Make sure, you are in root folder and try it out later!');
       exit(0);
     }
 
     try {
       findFolderByName('assets/cli', 'splash')!.path;
-      print('Folder is found');
+      Logger.error(message: 'Folder is found');
     } catch (e) {
-      print('Folder is not found');
+      Logger.error(message: 'Folder is not found');
       exit(0);
     }
 
@@ -38,7 +38,7 @@ class SplashCommand extends BaseCommand<SplashCommand> {
     if (Directory('ios').existsSync()) {
       await IOSSplashController(backgroundColor: dialogAnswers['backgroundColor']).execute();
     } else {
-      print('iOS folder not found, skipping iOS splash update...');
+      Logger.warning(message: 'iOS folder not found, skipping iOS splash update...');
     }
 
     return Future.value(null);

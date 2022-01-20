@@ -18,11 +18,11 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
   List<AndroidIconTemplateModel> get appIconList =>
       AndroidIconTemplateModel.generateAppIconTemplateModelListByIconTypeList(<AndroidIconTemplateModel>[
         AndroidIconTemplateModel(path: 'mipmap-ldpi', size: 0.75),
-        AndroidIconTemplateModel(path: 'mipmap-mdpi', size: 1),
+        AndroidIconTemplateModel(path: 'mipmap-mdpi', size: 1.0),
         AndroidIconTemplateModel(path: 'mipmap-hdpi', size: 1.5),
-        AndroidIconTemplateModel(path: 'mipmap-xhdpi', size: 2),
-        AndroidIconTemplateModel(path: 'mipmap-xxhdpi', size: 3),
-        AndroidIconTemplateModel(path: 'mipmap-xxxhdpi', size: 4),
+        AndroidIconTemplateModel(path: 'mipmap-xhdpi', size: 2.0),
+        AndroidIconTemplateModel(path: 'mipmap-xxhdpi', size: 3.0),
+        AndroidIconTemplateModel(path: 'mipmap-xxxhdpi', size: 4.0),
       ]);
 
   @override

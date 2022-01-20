@@ -110,6 +110,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "enum_to_string",
+      "rootUri": "file:///Users/charge212/.pub-cache/hosted/pub.dartlang.org/enum_to_string-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "ffi",
       "rootUri": "file:///Users/charge212/.pub-cache/hosted/pub.dartlang.org/ffi-1.1.2",
       "packageUri": "lib/",
@@ -416,13 +422,13 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "cli",
+      "name": "ricky_cli",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     }
   ],
-  "generated": "2022-01-19T13:21:41.468049Z",
+  "generated": "2022-01-20T11:21:07.813926Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }

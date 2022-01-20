@@ -24,6 +24,7 @@ dependencies:
   yaml: ">=3.1.0 <4.0.0"
   collection: ">=1.15.0 <2.0.0"
   colorize: ^3.0.0
+  enum_to_string: ^2.0.1
 
 #dependencies:
 #  path: ^1.7.0

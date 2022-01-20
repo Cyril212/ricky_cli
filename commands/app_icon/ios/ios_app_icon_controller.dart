@@ -13,9 +13,6 @@ class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
   IOSAppIconController({required Image image}) : super(image);
 
   @override
-  String get tag => 'AppIcon generation';
-
-  @override
   String get platform => kiOSPlatform;
 
   @override

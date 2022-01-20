@@ -4,6 +4,7 @@ import 'package:colorize/colorize.dart';
 
 import '../../core/base_command.dart';
 import '../../core/cli_communication_client.dart';
+import '../../core/logger.dart';
 
 import '../../utils/find_file/find_folder_by_directory.dart';
 
@@ -27,26 +28,26 @@ class HelpCommand extends BaseCommand<HelpCommand> {
     return File('$path/ascii_logo');
   }
 
-  Future<String> _readLogo() async {
+  Future _readAndDisplayLogo() async {
     try {
       final file = await _localFile;
 
       // Read the file
       final contents = await file.readAsString();
-
-      return contents;
+      Logger.custom(message: contents, style: Styles.BLUE);
     } catch (e) {
       // If encountering an error, return 0
-      return 'Error';
+      Logger.error(message: 'Logo file is not found');
     }
+    return null;
   }
 
   @override
   Future<void> executionBlock() async {
-    print('${Colorize(await _readLogo()).blue()}\n');
-    print(Colorize('Usage: ').green());
-    print('ricky_cli [command...]\n');
-    print(Colorize('Commands:').red());
+    await _readAndDisplayLogo();
+    Logger.custom(message: 'Usage: ', style: Styles.GREEN);
+    Logger.classic(message: 'ricky_cli [command...]\n');
+    Logger.custom(message: 'Commands: ', style: Styles.RED);
     CLICommunicationClient.availableCommandList.entries.forEach((entry) => print('${entry.key} - ${entry.value.description}'));
     return Future.value(null);
   }

@@ -1,12 +1,13 @@
 import 'package:meta/meta.dart';
+import '../core/logger.dart';
 
 @immutable
 abstract class BaseCommand<T> {
   @protected
-  String get startUpLog => '⚙️ ===== $tag executed ===== ⚙️';
+  String get startUpLog => '🚀 ===== $tag executed ===== 🚀️';
 
   @protected
-  String get complitionLog => '🏁 ===== $tag completed successfully ===== 🏁';
+  String get complitionLog => '🚀 ===== $tag completed successfully ===== 🚀';
 
   @protected
   String get tag => T.toString();
@@ -18,8 +19,8 @@ abstract class BaseCommand<T> {
   Future<void> executionBlock();
 
   Future<void> execute() async {
-    print(startUpLog);
+    Logger.classic(message: startUpLog);
     await executionBlock();
-    print(complitionLog);
+    Logger.classic(message: complitionLog);
   }
 }

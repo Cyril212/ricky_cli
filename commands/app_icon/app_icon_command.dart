@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:image/image.dart';
 
 import '../../core/constants.dart';
 import '../../core/base_command.dart';
+import '../../core/logger.dart';
 
 import 'android/android_app_icon_controller.dart';
 import '../../utils/general_utils.dart';
@@ -12,7 +14,6 @@ import 'ios/ios_app_icon_controller.dart';
 import '../../utils/exceptions/cli_exception.dart';
 
 class AppIconCommand extends BaseCommand<AppIconCommand> {
-
   @override
   String? get description => 'Generate app icons';
 
@@ -41,11 +42,14 @@ class AppIconCommand extends BaseCommand<AppIconCommand> {
 
     final dialogAnswers = dialog.ask();
     if (dialogAnswers['isInRoot'] != 'y') {
-      print('Make sure, you are in root folder and try it out later.');
+      Logger.debug(message: 'Make sure, you are in root folder and try it out later.');
       exit(0);
     }
 
-    switch (dialogAnswers['platformPreference'] as Platform) {
+    final platformPreferenceAnswer = (int.parse(dialogAnswers['platformPreference']) - 1);
+
+    final chosenPlatformPreference = Platform.values.firstWhere((platform) => platform.index == platformPreferenceAnswer);
+    switch (chosenPlatformPreference) {
       case Platform.android:
         await _executeAndroidAppIconGeneration(image: image, backgroundColor: dialogAnswers['backgroundColor']);
         break;
@@ -55,6 +59,8 @@ class AppIconCommand extends BaseCommand<AppIconCommand> {
       case Platform.both:
         await _executeAppIconGeneration(image: image, backgroundColor: dialogAnswers['backgroundColor']);
         break;
+      default:
+        throw CliException('Something went wrong');
     }
     return null;
   }
