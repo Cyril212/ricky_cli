@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:image/image.dart';
 
 import '../../core/constants.dart';
@@ -35,20 +34,19 @@ class AppIconCommand extends BaseCommand<AppIconCommand> {
       ['Please type in background color in HEX format like: #000000', 'backgroundColor'],
     ]);
 
+    final dialogAnswers = dialog.ask();
+
     final image = decodeImage(File(kSourceAppIconImagePath).readAsBytesSync());
     if (image == null) {
       throw CliException('ic_launcher.png is not found in assets/cli/app_icon/');
     }
 
-    final dialogAnswers = dialog.ask();
     if (dialogAnswers['isInRoot'] != 'y') {
       Logger.debug(message: 'Make sure, you are in root folder and try it out later.');
       exit(0);
     }
 
-    final platformPreferenceAnswer = (int.parse(dialogAnswers['platformPreference']) - 1);
-
-    final chosenPlatformPreference = Platform.values.firstWhere((platform) => platform.index == platformPreferenceAnswer);
+    final chosenPlatformPreference = Platform.values.firstWhere((platform) => platform.index == optionAnswer(dialogAnswers['platformPreference']));
     switch (chosenPlatformPreference) {
       case Platform.android:
         await _executeAndroidAppIconGeneration(image: image, backgroundColor: dialogAnswers['backgroundColor']);

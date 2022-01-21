@@ -5,25 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37002b5a-dd52-435c-92c4-f5df250f6c33" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/core/logger.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/pub/bin/ricky_cli/ricky_cli.dart-2.15.1.snapshot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.dart_tool/pub/bin/ricky_cli/ricky_cli.dart-2.15.1.snapshot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/pub/incremental/ricky_cli/ricky_cli.dart.incremental.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/pub/incremental/ricky_cli/ricky_cli.dart.incremental.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ricky_cli.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ricky_cli.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/app_icon/android/android_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/commands/app_icon/android/android_app_icon_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/app_icon/app_icon_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/commands/app_icon/app_icon_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/app_icon/ios/ios_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/commands/app_icon/ios/ios_app_icon_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/help/help_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/commands/help/help_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/android/android_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/commands/splash/android/android_splash_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/flutter/fluttter_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/commands/splash/flutter/fluttter_splash_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/splash_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/commands/splash/splash_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/base_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/core/base_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/base_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/core/base_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/cli_communication_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/core/cli_communication_client.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/icon_template_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/core/models/icon_template_model.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,12 +51,12 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/.dart_tool" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
     </key>
   </component>
   <component name="RunManager">
@@ -113,42 +99,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/commands/app_icon/app_icon_command.dart</url>
-          <line>59</line>
+          <line>60</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/commands/app_icon/app_icon_command.dart</url>
-          <line>53</line>
+          <line>54</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/commands/app_icon/app_icon_command.dart</url>
-          <line>56</line>
+          <line>57</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/commands/app_icon/app_icon_command.dart</url>
-          <line>62</line>
+          <line>63</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/commands/app_icon/app_icon_command.dart</url>
-          <line>52</line>
+          <line>53</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/commands/app_icon/app_icon_command.dart</url>
-          <line>51</line>
+          <line>52</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/commands/app_icon/app_icon_command.dart</url>
-          <line>48</line>
+          <line>49</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/commands/app_icon/app_icon_command.dart</url>
-          <line>50</line>
+          <line>51</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

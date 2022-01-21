@@ -18,7 +18,7 @@ class AndroidIconTemplateModel extends IconTemplateModel {
 
     iconList.forEach((icon) {
       AndroidIconTemplateModelType.values.forEach((type) {
-        resultingIconList.add(AndroidIconTemplateModel(path: icon.path + type.name, size: icon.size, type: type));
+        resultingIconList.add(AndroidIconTemplateModel(path: icon.path + '/' + type.name + '.png', size: icon.size, type: type));
       });
     });
 
@@ -29,7 +29,7 @@ class AndroidIconTemplateModel extends IconTemplateModel {
     final resultingIconList = <AndroidIconTemplateModel>[];
 
     iconList.forEach((icon) {
-      resultingIconList.add(AndroidIconTemplateModel(path: icon.path + '/ic_splash.png', size: icon.size));
+      resultingIconList.add(AndroidIconTemplateModel(path: icon.path + '/' + 'ic_splash.png', size: icon.size));
     });
 
     return resultingIconList;
