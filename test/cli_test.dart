@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ricky_cli/commands/app_icon/android/android_app_icon_controller.dart';
 import 'package:ricky_cli/commands/app_icon/ios/ios_app_icon_controller.dart';
 import 'package:ricky_cli/commands/splash/android/android_splash_controller.dart';
@@ -76,5 +78,15 @@ void main() {
     // test('can read in web structure config', () async {
     //   expect(true, true);
     // });
+  });
+
+  tearDown(() {
+    if (Directory('android').existsSync()) {
+      Directory('android').deleteSync(recursive: true);
+    }
+
+    if (Directory('ios').existsSync()) {
+      Directory('ios').deleteSync(recursive: true);
+    }
   });
 }
