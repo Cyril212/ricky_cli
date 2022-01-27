@@ -1,8 +1,8 @@
-class FileModel {
+class File {
   final String? name;
   final String? path;
 
-  FileModel({
+  File({
     this.name,
     this.path,
   });

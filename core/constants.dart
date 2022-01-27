@@ -8,7 +8,7 @@ const String kSourceImageFolder = 'assets/cli/splash/';
 
 const String kSplashImageFolder = 'assets/splash/';
 
-const String kSourceImagePath = 'assets/cli/splash/ic_splash.png';
+const String kSourceSplashImagePath = 'assets/cli/splash/ic_splash.png';
 const String kSourceAppIconImagePath = 'assets/cli/app_icon/ic_launcher.png';
 
 const String kDarkSourceImagePath = 'assets/cli/splash/ic_splash_dark.png';

@@ -9,7 +9,7 @@ import '../../../utils/exceptions/cli_exception.dart';
 import '../base_app_icon_controller.dart';
 
 class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplateModel> {
-  AndroidAppIconController({required Image image, required String backgroundColor}) : super(image, backgroundColor: backgroundColor);
+  AndroidAppIconController({required String backgroundColor}) : super(backgroundColor: backgroundColor);
 
   @override
   String get platform => kAndroidPlatform;
@@ -30,7 +30,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     log('Generating icons');
 
     final resizedBaseImage = copyResize(
-      image,
+      sourceImage,
       width: 192,
       height: 192,
       interpolation: Interpolation.average,

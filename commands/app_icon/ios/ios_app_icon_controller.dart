@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:image/image.dart';
-
 import '../../../core/constants.dart';
 import '../../splash/templates/templates.dart';
 
@@ -10,7 +8,6 @@ import '../../../utils/app_image_utils.dart';
 import '../base_app_icon_controller.dart';
 
 class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
-  IOSAppIconController({required Image image}) : super(image);
 
   @override
   String get platform => kiOSPlatform;
@@ -43,7 +40,7 @@ class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
     log('Generating app icons');
 
     for (var template in appIconList) {
-      AppImageUtils.saveImage(resFolder: kiOSAppIconsImageFolder, template: template, image: image);
+      AppImageUtils.saveImage(resFolder: kiOSAppIconsImageFolder, template: template, image: sourceImage);
     }
   }
 

@@ -15,8 +15,8 @@ abstract class BaseSplashController<T extends IconTemplateModel> extends BaseCon
   @protected
   bool get hasDarkMode => false;
 
-  @protected
-  String get sourceImagePath => kSourceImagePath;
+  @override
+  String get sourceImagePath => kSourceSplashImagePath;
 
   @protected
   String? get darkSourceImagePath => hasDarkMode ? kDarkSourceImagePath : null;
