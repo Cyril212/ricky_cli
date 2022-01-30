@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:ricky_cli/commands/app_icon/android/android_app_icon_controller.dart';
 import 'package:ricky_cli/commands/app_icon/ios/ios_app_icon_controller.dart';
 import 'package:ricky_cli/commands/splash/android/android_splash_controller.dart';
-import 'package:ricky_cli/core/templates/structure_template.dart';
-import 'package:ricky_cli/core/templates/template_configs/configs/template_config.dart';
-import 'package:ricky_cli/core/templates/template_configs/in_memory/in_memory_config.dart';
+import 'package:ricky_cli/core/template/structure_template.dart';
+import 'package:ricky_cli/core/template/config/structure_config.dart';
+import 'package:ricky_cli/core/template/in_memory/in_memory_config.dart';
+import 'package:ricky_cli/core/template/template_generator.dart';
 import 'package:test/test.dart';
 import 'package:collection/collection.dart';
 
@@ -78,6 +79,14 @@ void main() {
     // test('can read in web structure config', () async {
     //   expect(true, true);
     // });
+  });
+
+  group('Test template generator', () {
+    final fileTemplate = StructureTemplate(source: FileConfig(path: 'lib/core/template/file/bloc_config.yaml'));
+
+    test(('generate template from FileConfig'), () {
+      TemplateGenerator(template: fileTemplate).generateStructure();
+    });
   });
 
   tearDown(() {

@@ -5,7 +5,7 @@ import '../commands/help/help_command.dart';
 import '../core/logger.dart';
 
 import '../utils/exceptions/cli_exception.dart';
-import 'templates/structure_template.dart';
+import 'template/structure_template.dart';
 
 class CLICommunicationClient {
   static Map<String, BaseCommand> availableCommandList = {

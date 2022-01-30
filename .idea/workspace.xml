@@ -5,44 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37002b5a-dd52-435c-92c4-f5df250f6c33" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/core/templates/template_configs/file/bloc_config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/template/content/bloc_content.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/template/content/config_content.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/template/template_generator.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/pub/bin/ricky_cli/ricky_cli.dart-2.15.1.snapshot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ricky_cli.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ricky_cli.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/app_icon/android/android_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/android/android_app_icon_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/app_icon/app_icon_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/app_icon_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/app_icon/base_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/base_app_icon_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/app_icon/ios/ios_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/ios/ios_app_icon_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/create/create_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/create/create_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/help/help_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/help/help_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/help/logo/ascii_logo" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/help/logo/ascii_logo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/android/android_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/android/android_splash_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/android/android_version.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/android/android_version.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/base_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/base_splash_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/flutter/fluttter_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/flutter/fluttter_splash_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/ios/ios_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/ios/ios_splash_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/splash_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/splash_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/templates/templates.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/templates/templates.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/splash/utils/splash_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/utils/splash_utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/base_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/base_command.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/base_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/base_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/cli_communication_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/cli_communication_client.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/dialog_interactor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/dialog_interactor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/logger.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/logger.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/file_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/models/file_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/icon_template_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/models/icon_template_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/templates/structure_template.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/templates/structure_template.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/templates/template_configs/configs/template_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/templates/template_configs/configs/template_config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/templates/template_configs/file/bloc_config.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/templates/template_configs/in_memory/in_memory_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/templates/template_configs/in_memory/in_memory_config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/cli_communication_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/cli_communication_client.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/templates/structure_template.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/structure_template.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/templates/template_configs/configs/template_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/config/structure_config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/templates/template_configs/file/bloc_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/file/bloc_config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/templates/template_configs/in_memory/in_memory_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/in_memory/in_memory_config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/cli_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/cli_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/app_image_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_image_utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/create/create_list_directory.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/create/create_list_directory.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/exceptions/cli_exception.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/exceptions/cli_exception.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/extensions/list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/extensions/list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/extensions/string.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/extensions/string.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/find_file/find_folder_by_directory.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/find_file/find_folder_by_directory.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/general_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/general_utils.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,10 +76,16 @@
       <recent name="$PROJECT_DIR$/core/template_configs/file" />
     </key>
   </component>
-  <component name="RunManager" selected="Dart Test.Tests in cli_test.dart">
+  <component name="RunManager" selected="Dart Command Line App.Dart App">
     <configuration name="Dart App" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="arguments" value="app_icon" />
       <option name="filePath" value="$PROJECT_DIR$/bin/ricky_cli.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test template generator in cli_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/test/cli_test.dart" />
+      <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
+      <option name="testName" value="Test template generator" />
       <method v="2" />
     </configuration>
     <configuration name="Tests in cli_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
@@ -126,19 +111,13 @@
       <option name="testName" value="can read in memory structure config" />
       <method v="2" />
     </configuration>
-    <configuration name="structure templates tests in cli_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/test/cli_test.dart" />
-      <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
-      <option name="testName" value="structure templates tests" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Dart Test.Test template generator in cli_test.dart" />
         <item itemvalue="Dart Test.Tests in cli_test.dart" />
         <item itemvalue="Dart Test.can execute successfully with incorrectly provided background in case AndroidManifest.xml is not provided in cli_test.dart" />
         <item itemvalue="Dart Test.can execute successfully with provided background in cli_test.dart" />
         <item itemvalue="Dart Test.can read in memory structure config in cli_test.dart" />
-        <item itemvalue="Dart Test.structure templates tests in cli_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -203,6 +182,71 @@
           <line>7</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/template_generator.dart</url>
+          <line>12</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/template_generator.dart</url>
+          <line>11</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/template_generator.dart</url>
+          <line>10</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/config/structure_config.dart</url>
+          <line>29</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/config/structure_config.dart</url>
+          <line>31</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/config/structure_config.dart</url>
+          <line>23</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/../../flutter/bin/cache/dart-sdk/lib/io/file_impl.dart</url>
+          <line>572</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/../../flutter/bin/cache/dart-sdk/lib/io/file_impl.dart</url>
+          <line>568</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/../../flutter/bin/cache/dart-sdk/lib/io/file_impl.dart</url>
+          <line>561</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/../../flutter/bin/cache/dart-sdk/lib/io/file_impl.dart</url>
+          <line>563</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/antlr4-4.9.3/lib/antlr4.dart</url>
+          <line>8</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/antlr4-4.9.3/lib/src/tree/src/tree.dart</url>
+          <line>224</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/bin/ricky_cli.dart</url>
+          <line>3</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint suspend="THREAD" type="dart-exception" />
@@ -211,6 +255,9 @@
     <watches-manager>
       <configuration name="DartTestRunConfigurationType">
         <watch expression="ListEquality&lt;StructureElement&gt;().equals(structure, expectedStructure)" language="Dart" />
+        <watch expression="await yamlConfig.readAsString()" language="Dart" />
+        <watch expression="yamlConfig.readAsString()" language="Dart" />
+        <watch expression="yamlConfig" language="Dart" />
       </configuration>
       <configuration name="DartCommandLineRunConfigurationType">
         <watch expression="Platform.values" language="Dart" />
