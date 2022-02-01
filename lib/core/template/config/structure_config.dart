@@ -7,11 +7,11 @@ import 'package:yaml/yaml.dart';
 import '../../logger.dart';
 import '../structure_template.dart';
 
-class InMemoryConfig extends StructureConfig<List<String>> {
-  InMemoryConfig({required List<String> content}) : super(source: content);
+class InMemoryConfig extends StructureConfig<List<StructureElement>> {
+  InMemoryConfig({required List<StructureElement> content}) : super(source: content);
 
   @override
-  Future<List<StructureElement>> retrieveStructure() => Future.value(source.map((path) => StructureElement(path: path)).toList());
+  Future<List<StructureElement>> retrieveStructure() => Future.value(source);
 }
 
 class FileConfig extends StructureConfig<String> {
@@ -25,12 +25,12 @@ class FileConfig extends StructureConfig<String> {
       throw CliException('FileConfig is not found');
     }
 
-    final yamlConfigAsString =  yamlConfig.readAsStringSync();
+    final yamlConfigAsString = yamlConfig.readAsStringSync();
 
     final YamlMap yamlStructure = loadYaml(yamlConfigAsString);
 
     final structureElementList = (yamlStructure['structure'] as YamlList).value;
-    return Future.value(structureElementList.map((path) => StructureElement(path: path)).toList());
+    return Future.value(structureElementList.map((structure) => StructureElement(path: structure['path'], tag: structure['tag'])).toList());
   }
 }
 

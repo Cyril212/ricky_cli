@@ -5,22 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37002b5a-dd52-435c-92c4-f5df250f6c33" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/core/template/content/bloc_content.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/core/template/content/config_content.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/core/template/template_generator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/pub/bin/ricky_cli/ricky_cli.dart-2.15.1.snapshot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/template/file/sample_config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/template/snippet/policy/base_snippet_policy.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/template/snippet/policy/sample/constants/constants_snippet_policy.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/template/snippet/sample/sample_project_snippet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/test/incremental_kernel.Ly9AZGFydD0yLjE0" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/test/incremental_kernel.Ly9AZGFydD0yLjE0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/templates/template_configs/file/bloc_config.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/cli_communication_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/cli_communication_client.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/templates/structure_template.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/structure_template.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/templates/template_configs/configs/template_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/config/structure_config.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/templates/template_configs/file/bloc_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/file/bloc_config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/templates/template_configs/in_memory/in_memory_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/in_memory/in_memory_config.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc_template/core/test2.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloc_template/test.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/config/structure_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/config/structure_config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/content/bloc_content.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/content/config_content.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/snippet/snippet_config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/file/bloc_config.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/in_memory/in_memory_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/in_memory/in_memory_config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/structure_template.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/structure_template.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/template_generator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/template_generator.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/cli_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/cli_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,12 +70,14 @@
       <recent name="$PROJECT_DIR$/.dart_tool" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/core/template/snippet/policy/sample/constants" />
+      <recent name="$PROJECT_DIR$/lib/core/template/snippet" />
+      <recent name="$PROJECT_DIR$/lib/core/template/snippet/sample" />
+      <recent name="$PROJECT_DIR$/lib/core/template/policy/sample" />
       <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$/core/templates" />
-      <recent name="$PROJECT_DIR$/core/template_configs/file" />
     </key>
   </component>
-  <component name="RunManager" selected="Dart Command Line App.Dart App">
+  <component name="RunManager" selected="Dart Test.Test template generator in cli_test.dart">
     <configuration name="Dart App" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="arguments" value="app_icon" />
       <option name="filePath" value="$PROJECT_DIR$/bin/ricky_cli.dart" />
@@ -99,10 +100,10 @@
       <option name="testName" value="can execute successfully with incorrectly provided background in case AndroidManifest.xml is not provided" />
       <method v="2" />
     </configuration>
-    <configuration name="can execute successfully with provided background in cli_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+    <configuration name="can read in file structure config in cli_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/test/cli_test.dart" />
       <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
-      <option name="testName" value="can execute successfully with provided background" />
+      <option name="testName" value="can read in file structure config" />
       <method v="2" />
     </configuration>
     <configuration name="can read in memory structure config in cli_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
@@ -114,10 +115,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Dart Test.Test template generator in cli_test.dart" />
+        <item itemvalue="Dart Test.can read in file structure config in cli_test.dart" />
+        <item itemvalue="Dart Test.can read in memory structure config in cli_test.dart" />
         <item itemvalue="Dart Test.Tests in cli_test.dart" />
         <item itemvalue="Dart Test.can execute successfully with incorrectly provided background in case AndroidManifest.xml is not provided in cli_test.dart" />
-        <item itemvalue="Dart Test.can execute successfully with provided background in cli_test.dart" />
-        <item itemvalue="Dart Test.can read in memory structure config in cli_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -198,21 +199,6 @@
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/template/config/structure_config.dart</url>
-          <line>29</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/template/config/structure_config.dart</url>
-          <line>31</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/template/config/structure_config.dart</url>
-          <line>23</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/../../flutter/bin/cache/dart-sdk/lib/io/file_impl.dart</url>
           <line>572</line>
           <option name="timeStamp" value="40" />
@@ -247,6 +233,26 @@
           <line>3</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/test/cli_test.dart</url>
+          <line>72</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/template_generator.dart</url>
+          <line>16</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/config/structure_config.dart</url>
+          <line>23</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/template/snippet/policy/base_snippet_policy.dart</url>
+          <line>33</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint suspend="THREAD" type="dart-exception" />
@@ -258,6 +264,14 @@
         <watch expression="await yamlConfig.readAsString()" language="Dart" />
         <watch expression="yamlConfig.readAsString()" language="Dart" />
         <watch expression="yamlConfig" language="Dart" />
+        <watch expression="structureElementList[0]" language="Dart" />
+        <watch expression="expectedStructure" language="Dart" />
+        <watch expression="snippet?..replaceAll(_classNamePlaceholder, classNameSection)" language="Dart" />
+        <watch expression="snippet       ?..replaceAll(_classNamePlaceholder, classNameSection)       ..replaceAll(_topLevelVariablePlaceholder, topLevelVariableSection)       ..replaceAll(_functionPlaceholder, _functionPlaceholder);" language="Dart" />
+        <watch expression="snippet?.replaceAll(_classNamePlaceholder, classNameSection);" language="Dart" />
+        <watch expression="snippet.replaceAll(_classNamePlaceholder, classNameSection)" language="Dart" />
+        <watch expression="snippet" language="Dart" />
+        <watch expression="snippet.replaceAll()" language="Dart" />
       </configuration>
       <configuration name="DartCommandLineRunConfigurationType">
         <watch expression="Platform.values" language="Dart" />

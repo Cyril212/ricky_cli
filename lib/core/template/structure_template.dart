@@ -1,26 +1,34 @@
 import 'dart:io';
 
 import 'package:meta/meta.dart';
+import 'package:ricky_cli/core/template/snippet/policy/base_snippet_policy.dart';
 
 import 'in_memory/in_memory_config.dart';
 import 'config/structure_config.dart';
+import 'snippet/policy/sample/constants/constants_snippet_policy.dart';
 
-class BlocTemplate extends StructureTemplate {
-  BlocTemplate.fromMemory() : super(source: InMemoryConfig(content: kBlocInMemoryConfig));
+class SampleTemplate extends StructureTemplate {
+  final List<BaseSnippetPolicy> fileSnippets = [
+    AppConstantSnippetPolicy(arguments: AppConstantSnippetPolicyArgs(appName: "SampleName")),
+    TextConstantSnippetPolicy(),
+    ThemeConstantSnippetPolicy(arguments: ThemeConstantSnippetPolicyArgs(primaryColor: 'FFF444', secondaryColor: '000444', shadowColor: '00000F'))
+  ];
 
-  BlocTemplate.fromConfig() : super(source: FileConfig(path: 'lib/core/template/file/bloc_config.yaml'));
+  SampleTemplate.fromMemory() : super(source: InMemoryConfig(content: kBlocInMemoryConfig));
+
+  SampleTemplate.fromConfig() : super(source: FileConfig(path: 'lib/core/template/file/sample_config.yaml'));
 }
 
 class StructureElement {
   final String path;
-  final Function(bool)? predicate;
+  final String tag;
 
-  StructureElement({required this.path, this.predicate});
+  const StructureElement({required this.path, required this.tag});
 
   @override
   bool operator ==(Object other) {
     if (other is! StructureElement) return false;
-    return path == other.path && predicate == other.predicate;
+    return path == other.path && tag == other.tag;
   }
 }
 

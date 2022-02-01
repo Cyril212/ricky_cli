@@ -60,17 +60,17 @@ void main() {
 
       final structure = await inMemoryTemplate.structure;
 
-      final expectedStructure = kBlocInMemoryConfig.map((element) => StructureElement(path: element)).toList();
+      final expectedStructure = kBlocInMemoryConfig.map((element) => StructureElement(path: element.path, tag: '')).toList();
 
       expect(const ListEquality<StructureElement>().equals(structure, expectedStructure), true);
     });
 
     test('can read in file structure config', () async {
-      final fileTemplate = StructureTemplate(source: FileConfig(path: 'lib/core/templates/template_configs/file/bloc_config.yaml'));
+      final fileTemplate = StructureTemplate(source: FileConfig(path: 'lib/core/template/file/sample_config.yaml'));
 
       final structure = await fileTemplate.structure;
 
-      final expectedStructure = kBlocInMemoryConfig.map((element) => StructureElement(path: element)).toList();
+      final expectedStructure = kBlocInMemoryConfig;
 
       expect(const ListEquality<StructureElement>().equals(structure, expectedStructure), true);
     });
@@ -82,7 +82,7 @@ void main() {
   });
 
   group('Test template generator', () {
-    final fileTemplate = StructureTemplate(source: FileConfig(path: 'lib/core/template/file/bloc_config.yaml'));
+    final fileTemplate = StructureTemplate(source: FileConfig(path: 'lib/core/template/file/sample_config.yaml'));
 
     test(('generate template from FileConfig'), () {
       TemplateGenerator(template: fileTemplate).generateStructure();
