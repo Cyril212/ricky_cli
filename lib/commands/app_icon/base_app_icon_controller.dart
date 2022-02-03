@@ -8,12 +8,22 @@ import '../../core/constants.dart';
 
 abstract class BaseAppIconController<T extends IconTemplateModel> extends BaseController<T> {
   @protected
+  Image? customSourceImage;
+
+  @protected
   String? backgroundColor;
 
   BaseAppIconController({this.backgroundColor});
 
+  BaseAppIconController.custom({this.backgroundColor, Image? customSourceImage, errorHandler})
+      : customSourceImage = customSourceImage,
+        super.withHandler(errorHandler: errorHandler);
+
   @protected
   List<T> get appIconList;
+
+  @override
+  Image get sourceImage => customSourceImage ?? super.sourceImage;
 
   @override
   String get sourceImagePath => kSourceAppIconImagePath;
@@ -31,6 +41,9 @@ abstract class BaseAppIconController<T extends IconTemplateModel> extends BaseCo
       executeConfigurationProcess();
       return Future.value(true);
     } on Exception catch (e, _) {
+      if (errorHandler != null) {
+        errorHandler!(e);
+      }
       Logger.error(message: e.toString());
     }
     return Future.value(false);

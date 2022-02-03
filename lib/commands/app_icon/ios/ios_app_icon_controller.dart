@@ -1,5 +1,9 @@
 import 'dart:io';
 
+import 'package:image/image.dart';
+import 'package:meta/meta.dart';
+import 'package:ricky_cli/core/base_controller.dart';
+
 import '../../../core/constants.dart';
 import '../../splash/templates/templates.dart';
 
@@ -9,6 +13,10 @@ import '../base_app_icon_controller.dart';
 
 class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
   IOSAppIconController({required String backgroundColor}) : super(backgroundColor: backgroundColor);
+
+  @experimental
+  IOSAppIconController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
 
   @override
   String get platform => kiOSPlatform;
@@ -38,7 +46,7 @@ class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
 
   @override
   void generateAppIcon() {
-    log('Generating app icons');
+    logger('Generating app icons');
 
     for (var template in appIconList) {
       AppImageUtils.saveImage(resFolder: kiOSAppIconsImageFolder, template: template, image: sourceImage);
@@ -46,7 +54,7 @@ class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
   }
 
   void _generateContentJson() {
-    log('Generating content.json file');
+    logger('Generating content.json file');
 
     final contentFile = File(kiOSContentFile);
     if (contentFile.existsSync()) {

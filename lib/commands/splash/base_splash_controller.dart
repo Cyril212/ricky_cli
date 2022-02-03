@@ -1,3 +1,4 @@
+import 'package:image/image.dart';
 import 'package:meta/meta.dart';
 import 'package:ricky_cli/core/logger.dart';
 import '../../core/constants.dart';
@@ -6,9 +7,16 @@ import '../../core/models/icon_template_model.dart';
 
 abstract class BaseSplashController<T extends IconTemplateModel> extends BaseController<T> {
   @protected
-  String backgroundColor;
+  Image? customSourceImage;
 
-  BaseSplashController(this.backgroundColor);
+  @protected
+  String? backgroundColor;
+
+  BaseSplashController({this.backgroundColor});
+
+  BaseSplashController.custom({required this.backgroundColor, Image? customSourceImage, errorHandler})
+      : customSourceImage = customSourceImage,
+        super.withHandler(errorHandler: errorHandler);
 
   @protected
   List<T> get splashIconList;

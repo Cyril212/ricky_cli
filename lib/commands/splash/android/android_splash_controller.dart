@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:image/image.dart';
+import 'package:meta/meta.dart';
+import 'package:ricky_cli/core/base_controller.dart';
 import 'package:xml/xml.dart';
 
 import '../../../core/models/icon_template_model.dart';
@@ -12,7 +14,11 @@ import '../base_splash_controller.dart';
 import '../../../core/constants.dart';
 
 class AndroidSplashController extends BaseSplashController<AndroidIconTemplateModel> {
-  AndroidSplashController({required String backgroundColor}) : super(backgroundColor);
+  AndroidSplashController({required String backgroundColor}) : super(backgroundColor: backgroundColor);
+
+  @experimental
+  AndroidSplashController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
 
   @override
   String get platform => kAndroidPlatform;
@@ -35,11 +41,11 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
   void _createLaunchBackground() {
     final launchBackgroundV21File = File(kAndroidV21LaunchBackgroundFile);
     if (launchBackgroundV21File.existsSync()) {
-      log('Removing drawable-v21 folder');
+      logger('Removing drawable-v21 folder');
       launchBackgroundV21File.delete();
     }
 
-    log('Creating $kAndroidLaunchBackgroundFile with splash image path');
+    logger('Creating $kAndroidLaunchBackgroundFile with splash image path');
     final launchBackgroundFile = File(kAndroidLaunchBackgroundFile);
     launchBackgroundFile.createSync(recursive: true);
 
@@ -75,12 +81,12 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
   }
 
   void _createBackgroundColor() {
-    log('Creating colors.xml');
+    logger('Creating colors.xml');
     final launchColorsFile = File(kAndroidColorsFile);
 
     launchColorsFile.createSync(recursive: true);
 
-    log('Adding background color');
+    logger('Adding background color');
 
     final launchColorDocumentBuilder = XmlBuilder();
 
@@ -95,7 +101,7 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
     final colorItemBuilder = XmlBuilder();
     colorItemBuilder.element('color', nest: () {
       colorItemBuilder.attribute('name', 'backgroundColor');
-      colorItemBuilder.text(backgroundColor);
+      colorItemBuilder.text(backgroundColor!);
     });
 
     items.add(colorItemBuilder.buildFragment());
@@ -108,7 +114,7 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
 
   @override
   void generateSplashLogo() {
-    log('Generating splash images');
+    logger('Generating splash images');
 
     final image = decodeImage(File(sourceImagePath).readAsBytesSync());
     if (image == null) {
@@ -128,7 +134,7 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
       stylesFile.deleteSync();
     }
 
-    log('Creating ${androidVersion.name} styles.xml file and adding it to your Android '
+    logger('Creating ${androidVersion.name} styles.xml file and adding it to your Android '
         'project');
 
     stylesFile.createSync(recursive: true);

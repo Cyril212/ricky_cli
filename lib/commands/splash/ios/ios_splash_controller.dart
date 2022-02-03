@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:image/image.dart';
+import 'package:meta/meta.dart';
+import 'package:ricky_cli/core/base_controller.dart';
 import 'package:xml/xml.dart';
 
 import '../../../core/models/icon_template_model.dart';
@@ -10,10 +12,13 @@ import '../../../core/constants.dart';
 import '../utils/splash_utils.dart';
 
 class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
-
   IOSSplashController({
     required String backgroundColor,
-  }) : super(backgroundColor);
+  }) : super(backgroundColor: backgroundColor);
+
+  @experimental
+  IOSSplashController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
 
   @override
   String get platform => kiOSPlatform;
@@ -27,7 +32,7 @@ class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
 
   @override
   void applySplashBackground() {
-    log('Applying background color');
+    logger('Applying background color');
 
     _setBackgroundColor(backgroundColor);
   }
@@ -67,7 +72,7 @@ class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
 
   @override
   void generateSplashLogo() {
-    log('Generating splash images');
+    logger('Generating splash images');
 
     _applyImageIOSByMode();
   }
@@ -80,7 +85,7 @@ class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
   void _applyImageIOS(String imagePath) {
     final image = decodeImage(File(imagePath).readAsBytesSync());
     if (image == null) {
-      log(imagePath + ' could not be loaded.');
+      logger(imagePath + ' could not be loaded.');
       exit(1);
     }
     for (var template in splashIconList) {

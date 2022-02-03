@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:image/image.dart';
+import 'package:meta/meta.dart';
+import 'package:ricky_cli/core/base_controller.dart';
 import 'package:xml/xml.dart';
 import '../../../core/models/icon_template_model.dart';
 import 'package:ricky_cli/utils/app_image_utils.dart';
@@ -10,6 +12,10 @@ import '../base_app_icon_controller.dart';
 
 class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplateModel> {
   AndroidAppIconController({required String backgroundColor}) : super(backgroundColor: backgroundColor);
+
+  @experimental
+  AndroidAppIconController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
 
   @override
   String get platform => kAndroidPlatform;
@@ -27,7 +33,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
   @override
   void generateAppIcon() {
-    log('Generating icons');
+    logger('Generating icons');
 
     final resizedBaseImage = copyResize(
       sourceImage,
@@ -76,7 +82,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
   }
 
   void generateAdaptiveIconXml() {
-    log('Creating adaptive icon config');
+    logger('Creating adaptive icon config');
     final launcherFile = File(kAndroidLauncher);
 
     if (launcherFile.existsSync()) {
@@ -85,7 +91,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
     launcherFile.createSync(recursive: true);
 
-    log('Adding background color');
+    logger('Adding background color');
     final launcherFileBuilder = XmlBuilder();
 
     launcherFileBuilder
@@ -113,14 +119,14 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
     launcherFile.writeAsStringSync(launcherFileDocument.toXmlString(pretty: true, indent: '   '));
 
-    log('Creating adaptive round icon config');
+    logger('Creating adaptive round icon config');
     launcherFile.copySync(kAndroidLauncherRound);
   }
 
   void addBackgroundColor(String backgroundColor) {
     final colorsFile = File(kAndroidColorsFile);
     if (colorsFile.existsSync()) {
-      log('colors.xml existing already, add launcher background color');
+      logger('colors.xml existing already, add launcher background color');
       final colorsDocument = XmlDocument.parse(colorsFile.readAsStringSync());
       final resources = colorsDocument.getElement('resources')?.name;
 
@@ -130,7 +136,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
         launcherBackground?.innerText = backgroundColor;
       } on StateError {
-        log('launcherBackground was not found in colors.xml. Adding lancherBackground color.');
+        logger('launcherBackground was not found in colors.xml. Adding lancherBackground color.');
 
         resources?.parent?.children
             .add(XmlElement(XmlName('color'), [XmlAttribute(XmlName('name'), 'launcherBackground')], [XmlText(backgroundColor)]));
@@ -138,7 +144,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
         colorsFile.writeAsStringSync(colorsDocument.toXmlString(pretty: true, indent: '    '));
       }
     } else {
-      log("colors.xml doesn't exist, create file and add launcher background color");
+      logger("colors.xml doesn't exist, create file and add launcher background color");
       colorsFile.createSync(recursive: true);
 
       final colorsFileBuilder = XmlBuilder()

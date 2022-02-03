@@ -5,12 +5,21 @@ import 'package:meta/meta.dart';
 import '../core/logger.dart';
 import '../utils/exceptions/cli_exception.dart';
 
+typedef ErrorHandler = Function(Exception e);
+
 abstract class BaseController<T> {
   @protected
   String get platform;
 
   @protected
-  void log(String message) => Logger.classic(message: '🔨[$platform] $message');
+  ErrorHandler? errorHandler;
+
+  BaseController();
+
+  BaseController.withHandler({this.errorHandler});
+
+  @protected
+  void logger(String message) => Logger.classic(message: '🔨[$platform] $message');
 
   @protected
   Image get sourceImage {

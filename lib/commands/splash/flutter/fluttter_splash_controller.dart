@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:image/image.dart';
+import 'package:meta/meta.dart';
+import 'package:ricky_cli/core/base_controller.dart';
 import 'package:ricky_cli/utils/exceptions/cli_exception.dart';
 
 import '../../../core/models/icon_template_model.dart';
@@ -10,7 +12,11 @@ import '../../../core/constants.dart';
 import '../../../core/logger.dart';
 
 class FlutterSplashController extends BaseSplashController<FlutterTemplateModel> {
-  FlutterSplashController() : super('');
+  FlutterSplashController() : super(backgroundColor: '');
+
+  @experimental
+  FlutterSplashController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
 
   @override
   String get platform => kFlutterPlatform;
