@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:image/image.dart';
+import 'package:ricky_cli/core/constants.dart';
+
 import 'android/android_splash_controller.dart';
 import '../../core/base_command.dart';
 import '../../core/dialog_interactor.dart';
@@ -27,15 +30,18 @@ class SplashCommand extends BaseCommand<SplashCommand> {
           }
         },
         onPlatformAnswer: (platform, answer) {
+          final sourceImage = decodeImage(File(kSourceSplashImagePath).readAsBytesSync());
+
+          //todo:handle no file found exception
           switch (platform) {
             case Platform.android:
-              _executeAndroidSplashGeneration(backgroundColor: answer['backgroundColor']);
+              _executeAndroidSplashGeneration(backgroundColor: answer['backgroundColor'], customSourceImage: sourceImage!);
               break;
             case Platform.ios:
-              _executeIOSSplashGeneration(backgroundColor: answer['backgroundColor']);
+              _executeIOSSplashGeneration(backgroundColor: answer['backgroundColor'], customSourceImage: sourceImage!);
               break;
             case Platform.both:
-              _executeSplashScreenGeneration(backgroundColor: answer['backgroundColor']);
+              _executeSplashScreenGeneration(backgroundColor: answer['backgroundColor'], customSourceImage: sourceImage!);
               break;
           }
         });
@@ -43,12 +49,15 @@ class SplashCommand extends BaseCommand<SplashCommand> {
     return Future.value(null);
   }
 
-  Future _executeSplashScreenGeneration({required String backgroundColor}) async {
-    await _executeAndroidSplashGeneration(backgroundColor: backgroundColor);
-    await _executeIOSSplashGeneration(backgroundColor: backgroundColor);
+  Future _executeSplashScreenGeneration({required String backgroundColor, required Image customSourceImage}) async {
+    await _executeAndroidSplashGeneration(backgroundColor: backgroundColor, customSourceImage: customSourceImage!);
+    await _executeIOSSplashGeneration(backgroundColor: backgroundColor, customSourceImage: customSourceImage!);
   }
 
-  Future _executeAndroidSplashGeneration({required String backgroundColor}) => AndroidSplashController(backgroundColor: backgroundColor).execute();
+  Future _executeAndroidSplashGeneration({required String backgroundColor, required Image customSourceImage}) {
+    return AndroidSplashController(backgroundColor: backgroundColor, customSourceImage: customSourceImage).execute();
+  }
 
-  Future _executeIOSSplashGeneration({required String backgroundColor}) => IOSSplashController(backgroundColor: backgroundColor).execute();
+  Future _executeIOSSplashGeneration({required String backgroundColor, required Image customSourceImage}) =>
+      IOSSplashController(backgroundColor: backgroundColor, customSourceImage: customSourceImage).execute();
 }

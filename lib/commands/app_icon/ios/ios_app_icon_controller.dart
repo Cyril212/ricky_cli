@@ -12,11 +12,12 @@ import '../../../utils/app_image_utils.dart';
 import '../base_app_icon_controller.dart';
 
 class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
-  IOSAppIconController({required String backgroundColor}) : super(backgroundColor: backgroundColor);
+  IOSAppIconController({required String backgroundColor, required Image customSourceImage})
+      : super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
 
   @experimental
-  IOSAppIconController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
-      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
+  IOSAppIconController.custom({required String backgroundColor, required Image customSourceImage, ErrorHandler? errorHandler, String? rootPath})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
 
   @override
   String get platform => kiOSPlatform;
@@ -49,14 +50,14 @@ class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
     logger('Generating app icons');
 
     for (var template in appIconList) {
-      AppImageUtils.saveImage(resFolder: kiOSAppIconsImageFolder, template: template, image: sourceImage);
+      AppImageUtils.saveImage(resFolder: getFullPath(kiOSAppIconsImageFolder), template: template, image: customSourceImage);
     }
   }
 
   void _generateContentJson() {
     logger('Generating content.json file');
 
-    final contentFile = File(kiOSContentFile);
+    final contentFile = File(getFullPath(kiOSContentFile));
     if (contentFile.existsSync()) {
       contentFile.delete(recursive: true);
     }

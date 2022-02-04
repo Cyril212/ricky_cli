@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:image/image.dart';
+import 'package:ricky_cli/core/constants.dart';
+
 import '../../core/base_command.dart';
 import '../../core/logger.dart';
 import '../../core/dialog_interactor.dart';
@@ -13,7 +16,7 @@ class AppIconCommand extends BaseCommand<AppIconCommand> {
   String? get description => 'Generate app icons';
 
   @override
-  Future<void> executionBlock() async {
+  Future<void> executionBlock() {
     DialogInteractor.instance.platformAwareInteraction(
         questions: [
           ['Are in the root folder of the project, and source image is located at assets/cli/app_icon? [y/n]', 'isInRoot'],
@@ -26,28 +29,33 @@ class AppIconCommand extends BaseCommand<AppIconCommand> {
           }
         },
         onPlatformAnswer: (platform, answer) {
+          final sourceImage = decodeImage(File(kSourceAppIconImagePath).readAsBytesSync());
+
+          //todo:handle no file found exception
           switch (platform) {
             case Platform.android:
-              _executeAndroidAppIconGeneration(backgroundColor: answer['backgroundColor']);
+              _executeAndroidAppIconGeneration(backgroundColor: answer['backgroundColor'], customSourceImage: sourceImage!);
               break;
             case Platform.ios:
-              _executeIOSAppIconGeneration(backgroundColor: answer['backgroundColor']);
+              _executeIOSAppIconGeneration(backgroundColor: answer['backgroundColor'], customSourceImage: sourceImage!);
               break;
             case Platform.both:
-              _executeAppIconGeneration(backgroundColor: answer['backgroundColor']);
+              _executeAppIconGeneration(backgroundColor: answer['backgroundColor'], customSourceImage: sourceImage!);
               break;
           }
         });
 
-    return null;
+    return Future.value(null);
   }
 
-  Future _executeAppIconGeneration({required String backgroundColor}) async {
-    await _executeAndroidAppIconGeneration(backgroundColor: backgroundColor);
-    await _executeIOSAppIconGeneration(backgroundColor: backgroundColor);
+  Future _executeAppIconGeneration({required String backgroundColor, required Image customSourceImage}) async {
+    await _executeAndroidAppIconGeneration(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
+    await _executeIOSAppIconGeneration(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
   }
 
-  Future _executeAndroidAppIconGeneration({required String backgroundColor}) => AndroidAppIconController(backgroundColor: backgroundColor).execute();
+  Future _executeAndroidAppIconGeneration({required String backgroundColor, required Image customSourceImage}) =>
+      AndroidAppIconController(backgroundColor: backgroundColor, customSourceImage: customSourceImage).execute();
 
-  Future _executeIOSAppIconGeneration({required String backgroundColor}) => IOSAppIconController(backgroundColor: backgroundColor).execute();
+  Future _executeIOSAppIconGeneration({required String backgroundColor, required Image customSourceImage}) =>
+      IOSAppIconController(backgroundColor: backgroundColor, customSourceImage: customSourceImage).execute();
 }

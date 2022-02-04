@@ -14,11 +14,12 @@ import '../base_splash_controller.dart';
 import '../../../core/constants.dart';
 
 class AndroidSplashController extends BaseSplashController<AndroidIconTemplateModel> {
-  AndroidSplashController({required String backgroundColor}) : super(backgroundColor: backgroundColor);
+  AndroidSplashController({required String backgroundColor, required Image customSourceImage})
+      : super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
 
   @experimental
-  AndroidSplashController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
-      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
+  AndroidSplashController.custom({required String backgroundColor, required Image customSourceImage, ErrorHandler? errorHandler, String? rootPath})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
 
   @override
   String get platform => kAndroidPlatform;
@@ -39,14 +40,14 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
   }
 
   void _createLaunchBackground() {
-    final launchBackgroundV21File = File(kAndroidV21LaunchBackgroundFile);
+    final launchBackgroundV21File = File(getFullPath(kAndroidV21LaunchBackgroundFile));
     if (launchBackgroundV21File.existsSync()) {
       logger('Removing drawable-v21 folder');
       launchBackgroundV21File.delete();
     }
 
     logger('Creating $kAndroidLaunchBackgroundFile with splash image path');
-    final launchBackgroundFile = File(kAndroidLaunchBackgroundFile);
+    final launchBackgroundFile = File(getFullPath(kAndroidLaunchBackgroundFile));
     launchBackgroundFile.createSync(recursive: true);
 
     final launchBackgroundDocumentBuilder = XmlBuilder();
@@ -82,7 +83,7 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
 
   void _createBackgroundColor() {
     logger('Creating colors.xml');
-    final launchColorsFile = File(kAndroidColorsFile);
+    final launchColorsFile = File(getFullPath(kAndroidColorsFile));
 
     launchColorsFile.createSync(recursive: true);
 
@@ -108,22 +109,16 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
 
     launchColorsFile.writeAsStringSync(launchColorDocument.toXmlString(pretty: true, indent: '   '));
 
-    _applyStylesXml(androidVersion: AndroidVersion.v30_and_lower, fullScreen: true, file: kAndroidStylesFile);
-    _applyStylesXml(androidVersion: AndroidVersion.v31, fullScreen: true, file: kAndroidV31StylesFile);
+    _applyStylesXml(androidVersion: AndroidVersion.v30_and_lower, fullScreen: true, file: getFullPath(kAndroidStylesFile));
+    _applyStylesXml(androidVersion: AndroidVersion.v31, fullScreen: true, file: getFullPath(kAndroidV31StylesFile));
   }
 
   @override
   void generateSplashLogo() {
     logger('Generating splash images');
 
-    final image = decodeImage(File(sourceImagePath).readAsBytesSync());
-    if (image == null) {
-      Logger.error(message: 'The file $sourceImagePath could not be read.');
-      exit(1);
-    }
-
     for (var template in splashIconList) {
-      AppImageUtils.saveImage(resFolder: kAndroidResFolder, template: template, image: image);
+      AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: customSourceImage);
     }
   }
 

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:image/image.dart';
 import 'package:meta/meta.dart';
 import 'package:ricky_cli/core/base_controller.dart';
-import 'package:ricky_cli/utils/exceptions/cli_exception.dart';
 
 import '../../../core/models/icon_template_model.dart';
 import '../../../utils/app_image_utils.dart';
@@ -12,11 +11,11 @@ import '../../../core/constants.dart';
 import '../../../core/logger.dart';
 
 class FlutterSplashController extends BaseSplashController<FlutterTemplateModel> {
-  FlutterSplashController() : super(backgroundColor: '');
+  FlutterSplashController({required Image customSourceImage}) : super(backgroundColor: '', customSourceImage: customSourceImage);
 
   @experimental
-  FlutterSplashController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
-      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
+  FlutterSplashController.custom({required String backgroundColor, required Image customSourceImage, ErrorHandler? errorHandler, String? rootPath})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
 
   @override
   String get platform => kFlutterPlatform;
@@ -37,13 +36,8 @@ class FlutterSplashController extends BaseSplashController<FlutterTemplateModel>
   void generateSplashLogo() {
     Logger.debug(message: '[Flutter] Creating splash images');
 
-    final image = decodeImage(File(sourceImagePath).readAsBytesSync());
-    if (image == null) {
-      throw CliException('The file $sourceImagePath could not be read.');
-    }
-
     for (var template in splashIconList) {
-      AppImageUtils.saveImage(resFolder: sourceImagePath, template: template, image: image);
+      AppImageUtils.saveImage(resFolder: getFullPath(kSplashImageFolder), template: template, image: customSourceImage);
     }
   }
 }

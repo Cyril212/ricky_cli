@@ -7,13 +7,16 @@
     <list default="true" id="37002b5a-dd52-435c-92c4-f5df250f6c33" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/commands/app_icon/android/android_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/android/android_app_icon_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/commands/app_icon/app_icon_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/app_icon_command.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/commands/app_icon/base_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/base_app_icon_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/commands/app_icon/ios/ios_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/ios/ios_app_icon_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/commands/splash/android/android_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/android/android_splash_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/commands/splash/base_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/base_splash_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/commands/splash/flutter/fluttter_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/flutter/fluttter_splash_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/commands/splash/ios/ios_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/ios/ios_splash_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/commands/splash/splash_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/splash_command.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/base_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/base_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/cli_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/cli_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +151,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/commands/app_icon/app_icon_command.dart</url>
-          <line>46</line>
+          <line>52</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -158,7 +161,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/commands/app_icon/base_app_icon_controller.dart</url>
-          <line>46</line>
+          <line>42</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -223,7 +226,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/test/cli_test.dart</url>
-          <line>72</line>
+          <line>79</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">

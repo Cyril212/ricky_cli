@@ -12,13 +12,12 @@ import '../../../core/constants.dart';
 import '../utils/splash_utils.dart';
 
 class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
-  IOSSplashController({
-    required String backgroundColor,
-  }) : super(backgroundColor: backgroundColor);
+  IOSSplashController({required String backgroundColor, required Image customSourceImage})
+      : super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
 
   @experimental
-  IOSSplashController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
-      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
+  IOSSplashController.custom({required String backgroundColor, required Image customSourceImage, ErrorHandler? errorHandler, String? rootPath})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
 
   @override
   String get platform => kiOSPlatform;
@@ -73,23 +72,13 @@ class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
   @override
   void generateSplashLogo() {
     logger('Generating splash images');
-
-    _applyImageIOSByMode();
-  }
-
-  void _applyImageIOSByMode() {
-    _applyImageIOS(sourceImagePath);
+    _applyImageIOS();
   }
 
   /// Create splash screen images for original size, @2x and @3x
-  void _applyImageIOS(String imagePath) {
-    final image = decodeImage(File(imagePath).readAsBytesSync());
-    if (image == null) {
-      logger(imagePath + ' could not be loaded.');
-      exit(1);
-    }
+  void _applyImageIOS() {
     for (var template in splashIconList) {
-      AppImageUtils.saveImage(resFolder: kiOSAssetsLaunchImageFolder, template: template, image: image);
+      AppImageUtils.saveImage(resFolder: kiOSAssetsLaunchImageFolder, template: template, image: customSourceImage);
     }
   }
 }

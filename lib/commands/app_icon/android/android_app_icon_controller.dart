@@ -11,11 +11,12 @@ import '../../../utils/exceptions/cli_exception.dart';
 import '../base_app_icon_controller.dart';
 
 class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplateModel> {
-  AndroidAppIconController({required String backgroundColor}) : super(backgroundColor: backgroundColor);
+  AndroidAppIconController({required String backgroundColor, required Image customSourceImage})
+      : super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
 
   @experimental
-  AndroidAppIconController.custom({required String backgroundColor, Image? customSourceImage, ErrorHandler? errorHandler})
-      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler);
+  AndroidAppIconController.custom({required String backgroundColor, required Image customSourceImage, ErrorHandler? errorHandler, String? rootPath})
+      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
 
   @override
   String get platform => kAndroidPlatform;
@@ -36,7 +37,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     logger('Generating icons');
 
     final resizedBaseImage = copyResize(
-      sourceImage,
+      customSourceImage,
       width: 192,
       height: 192,
       interpolation: Interpolation.average,
@@ -46,22 +47,22 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
     for (var template in appIconList) {
       if (template.type == AndroidIconTemplateModelType.ic_launcher_round) {
-        AppImageUtils.saveImage(resFolder: kAndroidResFolder, template: template, image: circleResizedBaseImage);
+        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: circleResizedBaseImage);
       } else {
-        AppImageUtils.saveImage(resFolder: kAndroidResFolder, template: template, image: resizedBaseImage);
+        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: resizedBaseImage);
       }
     }
   }
 
   @override
   void executeConfigurationProcess() {
-    generateAdaptiveIconXml();
-    applyIconParametersToManifest();
-    addBackgroundColor(backgroundColor!);
+    _generateAdaptiveIconXml();
+    _applyIconParametersToManifest();
+    _addBackgroundColor(backgroundColor!);
   }
 
-  void applyIconParametersToManifest() {
-    final androidManifestFile = File(kAndroidManifestFile);
+  void _applyIconParametersToManifest() {
+    final androidManifestFile = File(getFullPath(kAndroidManifestFile));
     if (androidManifestFile.existsSync()) {
       final androidManifestXMLDocument = XmlDocument.parse(androidManifestFile.readAsStringSync());
       final applicationElement = androidManifestXMLDocument.getElement('manifest')?..getElement('application');
@@ -81,9 +82,9 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     }
   }
 
-  void generateAdaptiveIconXml() {
+  void _generateAdaptiveIconXml() {
     logger('Creating adaptive icon config');
-    final launcherFile = File(kAndroidLauncher);
+    final launcherFile = File(getFullPath(kAndroidLauncher));
 
     if (launcherFile.existsSync()) {
       launcherFile.delete(recursive: true);
@@ -123,8 +124,8 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     launcherFile.copySync(kAndroidLauncherRound);
   }
 
-  void addBackgroundColor(String backgroundColor) {
-    final colorsFile = File(kAndroidColorsFile);
+  void _addBackgroundColor(String backgroundColor) {
+    final colorsFile = File(getFullPath(kAndroidColorsFile));
     if (colorsFile.existsSync()) {
       logger('colors.xml existing already, add launcher background color');
       final colorsDocument = XmlDocument.parse(colorsFile.readAsStringSync());

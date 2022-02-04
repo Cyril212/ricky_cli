@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:image/image.dart';
 import 'package:ricky_cli/commands/app_icon/android/android_app_icon_controller.dart';
 import 'package:ricky_cli/commands/app_icon/ios/ios_app_icon_controller.dart';
 import 'package:ricky_cli/commands/splash/android/android_splash_controller.dart';
+import 'package:ricky_cli/core/constants.dart';
 import 'package:ricky_cli/core/template/structure_template.dart';
 import 'package:ricky_cli/core/template/config/structure_config.dart';
 import 'package:ricky_cli/core/template/in_memory/in_memory_config.dart';
@@ -16,17 +18,18 @@ void main() {
     // test('can execute successfully with provided background in case AndroidManifest.xml is provided', () {
     //   expectLater(AndroidAppIconController(backgroundColor: '#000000').execute(), completion(true));
     // });
+    final sourceImage = decodeImage(File(kSourceAppIconImagePath).readAsBytesSync());
 
     test('can execute successfully with incorrectly provided background in case AndroidManifest.xml is provided', () {
-      expectLater(AndroidAppIconController(backgroundColor: '43243').execute(), completion(false));
+      expectLater(AndroidAppIconController(backgroundColor: '43243', customSourceImage: sourceImage!).execute(), completion(false));
     });
 
     test('can execute successfully with incorrectly provided background in case AndroidManifest.xml is not provided', () {
-      expectLater(AndroidAppIconController(backgroundColor: '43243').execute(), completion(false));
+      expectLater(AndroidAppIconController(backgroundColor: '43243', customSourceImage: sourceImage!).execute(), completion(false));
     });
 
     test('can execute successfully with provided background in case AndroidManifest.xml is not provided', () {
-      expectLater(AndroidAppIconController(backgroundColor: '#000000').execute(), completion(false));
+      expectLater(AndroidAppIconController(backgroundColor: '#000000', customSourceImage: sourceImage!).execute(), completion(false));
     });
   });
 
@@ -36,14 +39,18 @@ void main() {
     //   expectLater(IOSAppIconController(backgroundColor: '#000000').execute(), completion(true));
     // });
 
+    final sourceImage = decodeImage(File(kSourceAppIconImagePath).readAsBytesSync());
+
     test("can execute successfully with provided background and ios folder doesn't exist", () {
-      expectLater(IOSAppIconController(backgroundColor: '#000000').execute(), completion(true));
+      expectLater(IOSAppIconController(backgroundColor: '#000000', customSourceImage: sourceImage!).execute(), completion(true));
     });
   });
 
   group('Android splash creation tests', () {
+    final sourceImage = decodeImage(File(kSourceSplashImagePath).readAsBytesSync());
+
     test('can execute successfully with provided background', () {
-      expectLater(AndroidSplashController(backgroundColor: '#000000').execute(), completion(true));
+      expectLater(AndroidSplashController(backgroundColor: '#000000',customSourceImage: sourceImage!).execute(), completion(true));
     });
   });
 

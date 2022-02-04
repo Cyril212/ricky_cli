@@ -7,28 +7,22 @@ import '../../core/models/icon_template_model.dart';
 
 abstract class BaseSplashController<T extends IconTemplateModel> extends BaseController<T> {
   @protected
-  Image? customSourceImage;
+  Image customSourceImage;
 
   @protected
   String? backgroundColor;
 
-  BaseSplashController({this.backgroundColor});
+  BaseSplashController({this.backgroundColor, required this.customSourceImage});
 
-  BaseSplashController.custom({required this.backgroundColor, Image? customSourceImage, errorHandler})
+  BaseSplashController.custom({required this.backgroundColor, required Image customSourceImage, errorHandler, rootPath})
       : customSourceImage = customSourceImage,
-        super.withHandler(errorHandler: errorHandler);
+        super.custom(errorHandler: errorHandler, rootPath: rootPath);
 
   @protected
   List<T> get splashIconList;
 
   @protected
   bool get hasDarkMode => false;
-
-  @override
-  String get sourceImagePath => kSourceSplashImagePath;
-
-  @protected
-  String? get darkSourceImagePath => hasDarkMode ? kDarkSourceImagePath : null;
 
   @protected
   void generateSplashLogo();

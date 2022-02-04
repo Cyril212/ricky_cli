@@ -14,25 +14,21 @@ abstract class BaseController<T> {
   @protected
   ErrorHandler? errorHandler;
 
-  BaseController();
+  @protected
+  final String rootPath;
 
-  BaseController.withHandler({this.errorHandler});
+  BaseController() : rootPath = '';
+
+  BaseController.custom({this.errorHandler, rootPath}) : rootPath = rootPath ?? '';
 
   @protected
   void logger(String message) => Logger.classic(message: '🔨[$platform] $message');
 
   @protected
-  Image get sourceImage {
-    final image = decodeImage(File(sourceImagePath).readAsBytesSync());
-    if (image == null) {
-      throw CliException('ic_launcher.png is not found in assets/cli/app_icon/');
-    }
-    return image;
-  }
-
-  @protected
-  String get sourceImagePath;
-
-  @protected
   Future<bool> execute();
+
+  @protected
+  String getFullPath(String filePath) {
+    return '$rootPath/$filePath';
+  }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:image/image.dart';
 import 'package:meta/meta.dart';
 import 'package:ricky_cli/core/logger.dart';
@@ -8,25 +10,19 @@ import '../../core/constants.dart';
 
 abstract class BaseAppIconController<T extends IconTemplateModel> extends BaseController<T> {
   @protected
-  Image? customSourceImage;
+  Image customSourceImage;
 
   @protected
   String? backgroundColor;
 
-  BaseAppIconController({this.backgroundColor});
+  BaseAppIconController({this.backgroundColor, required this.customSourceImage});
 
-  BaseAppIconController.custom({this.backgroundColor, Image? customSourceImage, errorHandler})
+  BaseAppIconController.custom({this.backgroundColor, required Image customSourceImage, errorHandler, rootPath})
       : customSourceImage = customSourceImage,
-        super.withHandler(errorHandler: errorHandler);
+        super.custom(errorHandler: errorHandler, rootPath: rootPath);
 
   @protected
   List<T> get appIconList;
-
-  @override
-  Image get sourceImage => customSourceImage ?? super.sourceImage;
-
-  @override
-  String get sourceImagePath => kSourceAppIconImagePath;
 
   @protected
   void generateAppIcon();
