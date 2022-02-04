@@ -29,6 +29,6 @@ abstract class BaseController<T> {
 
   @protected
   String getFullPath(String filePath) {
-    return '$rootPath$filePath';
+    return rootPath.isEmpty ? filePath : '$rootPath/$filePath';
   }
 }
