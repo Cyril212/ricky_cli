@@ -50,8 +50,8 @@ class SplashCommand extends BaseCommand<SplashCommand> {
   }
 
   Future _executeSplashScreenGeneration({required String backgroundColor, required Image customSourceImage}) async {
-    await _executeAndroidSplashGeneration(backgroundColor: backgroundColor, customSourceImage: customSourceImage!);
-    await _executeIOSSplashGeneration(backgroundColor: backgroundColor, customSourceImage: customSourceImage!);
+    await _executeAndroidSplashGeneration(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
+    await _executeIOSSplashGeneration(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
   }
 
   Future _executeAndroidSplashGeneration({required String backgroundColor, required Image customSourceImage}) {
