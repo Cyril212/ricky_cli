@@ -10,6 +10,10 @@ class AppImageUtils {
         height: template.dimens != null ? (image.height * template.dimens! ~/ 4) : template.size!.round(),
         interpolation: Interpolation.average);
 
+    var directory = Directory(resFolder);
+    if (!directory.existsSync()) {
+      directory.createSync();
+    }
     var imagePath = File(resFolder + template.path);
     imagePath
       ..createSync(recursive: true)
