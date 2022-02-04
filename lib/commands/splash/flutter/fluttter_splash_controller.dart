@@ -22,11 +22,11 @@ class FlutterSplashController extends BaseSplashController<FlutterTemplateModel>
 
   @override
   List<FlutterTemplateModel> get splashIconList => <FlutterTemplateModel>[
-        FlutterTemplateModel(path: '', dimens: 1.0),
-        FlutterTemplateModel(path: '1.5x', dimens: 1.5),
-        FlutterTemplateModel(path: '2.0x', dimens: 2.0),
-        FlutterTemplateModel(path: '3.0x', dimens: 3.0),
-        FlutterTemplateModel(path: '4.0x', dimens: 4.0),
+        FlutterTemplateModel(path: 'ic_splash.png', dimens: 1.0),
+        FlutterTemplateModel(path: '1.5x/ic_splash.png', dimens: 1.5),
+        FlutterTemplateModel(path: '2.0x/ic_splash.png', dimens: 2.0),
+        FlutterTemplateModel(path: '3.0x/ic_splash.png', dimens: 3.0),
+        FlutterTemplateModel(path: '4.0x/ic_splash.png', dimens: 4.0),
       ];
 
   @override
