@@ -44,7 +44,7 @@ class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
       var greenChannel = ((int.parse(parsedColor.substring(2, 4), radix: 16)) / 255).toString();
       var blueChannel = ((int.parse(parsedColor.substring(4, 6), radix: 16)) / 255).toString();
 
-      final launchStoryBoardFile = File(kiOSLaunchScreenStoryboardFile);
+      final launchStoryBoardFile = File(getFullPath(kiOSLaunchScreenStoryboardFile));
       final parsedLaunchStoryBoardXMLDocument = XmlDocument.parse(launchStoryBoardFile.readAsStringSync());
 
       // Find root xml element
