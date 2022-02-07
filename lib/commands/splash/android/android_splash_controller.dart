@@ -26,11 +26,11 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
 
   @override
   List<AndroidIconTemplateModel> get splashIconList => AndroidIconTemplateModel.generateSplashIconTemplateModelList(<AndroidIconTemplateModel>[
-        AndroidIconTemplateModel(path: 'mipmap-mdpi', dimens: 1.0),
-        AndroidIconTemplateModel(path: 'mipmap-hdpi', dimens: 1.5),
-        AndroidIconTemplateModel(path: 'mipmap-xhdpi', dimens: 2.0),
-        AndroidIconTemplateModel(path: 'mipmap-xxhdpi', dimens: 3.0),
-        AndroidIconTemplateModel(path: 'mipmap-xxxhdpi', dimens: 4.0),
+        AndroidIconTemplateModel(path: 'drawable-mdpi', dimens: 1.0),
+        AndroidIconTemplateModel(path: 'drawable-hdpi', dimens: 1.5),
+        AndroidIconTemplateModel(path: 'drawable-xhdpi', dimens: 2.0),
+        AndroidIconTemplateModel(path: 'drawable-xxhdpi', dimens: 3.0),
+        AndroidIconTemplateModel(path: 'drawable-xxxhdpi', dimens: 4.0),
       ]);
 
   @override
@@ -73,7 +73,7 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
       splashItemBuilder.element('bitmap', nest: () {
         splashItemBuilder
           ..attribute('android:gravity', 'center')
-          ..attribute('android:src', '@mipmap/ic_splash');
+          ..attribute('android:src', '@drawable/ic_splash');
       });
     });
     items.add(splashItemBuilder.buildFragment());
