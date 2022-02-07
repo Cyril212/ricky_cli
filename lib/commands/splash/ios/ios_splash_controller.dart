@@ -78,7 +78,7 @@ class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
   /// Create splash screen images for original size, @2x and @3x
   void _applyImageIOS() {
     for (var template in splashIconList) {
-      AppImageUtils.saveImage(resFolder: kiOSAssetsLaunchImageFolder, template: template, image: customSourceImage);
+      AppImageUtils.saveImage(resFolder: getFullPath(kiOSAssetsLaunchImageFolder), template: template, image: customSourceImage);
     }
   }
 }
