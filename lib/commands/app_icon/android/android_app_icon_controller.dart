@@ -121,7 +121,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     launcherFile.writeAsStringSync(launcherFileDocument.toXmlString(pretty: true, indent: '   '));
 
     logger('Creating adaptive round icon config');
-    launcherFile.copySync(kAndroidLauncherRound);
+    launcherFile.copySync(getFullPath(kAndroidLauncherRound));
   }
 
   void _addBackgroundColor(String backgroundColor) {
