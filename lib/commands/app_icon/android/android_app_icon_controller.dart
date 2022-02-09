@@ -47,8 +47,8 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
     final resizedBaseForegroundImage = copyResize(
       customSourceImage,
-      width: 512,
-      height: 512,
+      width: 432,
+      height: 432,
       interpolation: Interpolation.average,
     );
 
