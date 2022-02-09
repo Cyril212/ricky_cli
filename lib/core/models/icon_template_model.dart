@@ -2,7 +2,7 @@
 
 /// [name] might be directory name or file name
 
-enum AndroidIconTemplateModelType { ic_launcher, ic_launcher_foreground, ic_launcher_round }
+enum AndroidIconTemplateModelType { ic_launcher, ic_launcher_round, ic_launcher_foreground }
 
 class AndroidIconTemplateModel extends IconTemplateModel {
   final AndroidIconTemplateModelType _type;
