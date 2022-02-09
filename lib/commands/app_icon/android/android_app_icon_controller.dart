@@ -36,20 +36,29 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
   void generateAppIcon() {
     logger('Generating icons');
 
-    final resizedBaseImage = copyResize(
+    final resizedBaseLauncherImage = copyResize(
       customSourceImage,
       width: 192,
       height: 192,
       interpolation: Interpolation.average,
     );
 
-    final circleResizedBaseImage = copyCropCircle(resizedBaseImage);
+    final circleResizedBaseImage = copyCropCircle(resizedBaseLauncherImage);
+
+    final resizedBaseForegroundImage = copyResize(
+      customSourceImage,
+      width: 512,
+      height: 512,
+      interpolation: Interpolation.average,
+    );
 
     for (var template in appIconList) {
-      if (template.type == AndroidIconTemplateModelType.ic_launcher_round) {
+      if (template.type == AndroidIconTemplateModelType.ic_launcher) {
+        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: resizedBaseLauncherImage);
+      } else if (template.type == AndroidIconTemplateModelType.ic_launcher_round) {
         AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: circleResizedBaseImage);
       } else {
-        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: resizedBaseImage);
+        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: resizedBaseForegroundImage);
       }
     }
   }
