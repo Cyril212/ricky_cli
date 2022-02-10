@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:image/image.dart';
 import 'package:meta/meta.dart';
@@ -11,12 +12,17 @@ import '../../../utils/exceptions/cli_exception.dart';
 import '../base_app_icon_controller.dart';
 
 class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplateModel> {
+  final double _resizeAmount;
+
   AndroidAppIconController({required String backgroundColor, required Image customSourceImage})
-      : super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
+      : _resizeAmount = 0,
+        super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
 
   @experimental
-  AndroidAppIconController.custom({required String backgroundColor, required Image customSourceImage, ErrorHandler? errorHandler, String? rootPath})
-      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
+  AndroidAppIconController.custom(
+      {required String backgroundColor, required Image customSourceImage, required resizeAmount, ErrorHandler? errorHandler, String? rootPath})
+      : _resizeAmount = resizeAmount,
+        super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
 
   @override
   String get platform => kAndroidPlatform;
@@ -47,10 +53,17 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
     final resizedBaseForegroundImage = copyResize(
       customSourceImage,
-      width: 432,
-      height: 432,
+      width: (customSourceImage.width * _resizeAmount).toInt(),
+      height: (customSourceImage.height * _resizeAmount).toInt(),
       interpolation: Interpolation.average,
     );
+
+    final baseAlphaChannelLayerImage = Image(432, 432);
+    final paddingX = (432 - resizedBaseForegroundImage.width) ~/ 2;
+    final paddingY = (432 - resizedBaseForegroundImage.height) ~/ 2;
+
+    final foregroundImage = drawImage(baseAlphaChannelLayerImage, resizedBaseForegroundImage,
+        dstX: paddingX, dstY: paddingY); //change padding depending on resizedBaseForegroundImage size
 
     for (var template in appIconList) {
       if (template.type == AndroidIconTemplateModelType.ic_launcher) {
@@ -58,7 +71,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
       } else if (template.type == AndroidIconTemplateModelType.ic_launcher_round) {
         AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: circleResizedBaseImage);
       } else {
-        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: resizedBaseForegroundImage);
+        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: foregroundImage);
       }
     }
   }
