@@ -42,15 +42,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
   void generateAppIcon() {
     logger('Generating icons');
 
-    final resizedBaseLauncherImage = copyResize(
-      customSourceImage,
-      width: 192,
-      height: 192,
-      interpolation: Interpolation.average,
-    );
-
-    final circleResizedBaseImage = copyCropCircle(resizedBaseLauncherImage);
-
+    //foreground
     final resizedBaseForegroundImage = copyResize(
       customSourceImage,
       width: (customSourceImage.width * _resizeAmount).toInt(),
@@ -59,17 +51,41 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     );
 
     final baseAlphaChannelLayerImage = Image(432, 432);
-    final paddingX = (432 - resizedBaseForegroundImage.width) ~/ 2;
-    final paddingY = (432 - resizedBaseForegroundImage.height) ~/ 2;
+
+    final paddingX = resizedBaseForegroundImage.width < 432 ? (432 - resizedBaseForegroundImage.width) ~/ 2 : 0;
+    final paddingY = resizedBaseForegroundImage.height < 432 ? (432 - resizedBaseForegroundImage.height) ~/ 2 : 0;
 
     final foregroundImage = drawImage(baseAlphaChannelLayerImage, resizedBaseForegroundImage,
         dstX: paddingX, dstY: paddingY); //change padding depending on resizedBaseForegroundImage size
 
+    //legacy
+    final resizedLegacyIcon = copyResize(
+      resizedBaseForegroundImage,
+      width: 192,
+      height: 192,
+      interpolation: Interpolation.average,
+    );
+
+    //round
+    final resizedRoundImage = copyCropCircle(copyResize(
+      resizedBaseForegroundImage,
+      width: 180,
+      height: 180,
+      interpolation: Interpolation.average,
+    ));
+
+    final baseAlphaChannelRoundLayerImage = Image(192, 192);
+
+    final roundPaddingX = (192 - resizedRoundImage.width) ~/ 2;
+    final roundPaddingY = (192 - resizedRoundImage.height) ~/ 2;
+
+    final resizedRoundIcon = drawImage(baseAlphaChannelRoundLayerImage, resizedRoundImage, dstX: roundPaddingX, dstY: roundPaddingY);
+
     for (var template in appIconList) {
       if (template.type == AndroidIconTemplateModelType.ic_launcher) {
-        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: resizedBaseLauncherImage);
+        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: resizedLegacyIcon);
       } else if (template.type == AndroidIconTemplateModelType.ic_launcher_round) {
-        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: circleResizedBaseImage);
+        AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: resizedRoundIcon);
       } else {
         AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: foregroundImage);
       }
