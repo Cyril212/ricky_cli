@@ -67,14 +67,14 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     );
 
     //round
-    final resizedRoundImage = copyCropCircle(copyResize(
-      resizedBaseForegroundImage,
-      width: 180,
-      height: 180,
-      interpolation: Interpolation.average,
-    ));
+    final croppedRoundImage = copyCropCircle(foregroundImage, radius: 160);
 
     final baseAlphaChannelRoundLayerImage = Image(192, 192);
+
+    final resizedRoundImage = copyResize(croppedRoundImage,
+      width: 178,
+      height: 178,
+      interpolation: Interpolation.average,);
 
     final roundPaddingX = (192 - resizedRoundImage.width) ~/ 2;
     final roundPaddingY = (192 - resizedRoundImage.height) ~/ 2;
@@ -103,7 +103,8 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     final androidManifestFile = File(getFullPath(kAndroidManifestFile));
     if (androidManifestFile.existsSync()) {
       final androidManifestXMLDocument = XmlDocument.parse(androidManifestFile.readAsStringSync());
-      final applicationElement = androidManifestXMLDocument.getElement('manifest')?..getElement('application');
+      final applicationElement = androidManifestXMLDocument.getElement('manifest')
+        ?..getElement('application');
 
       if (applicationElement == null) {
         throw CliException('$platform application element was not found. Exit.');
@@ -111,8 +112,8 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
       applicationElement.attributes
         ..removeWhere((element) => element.name.toString() == 'android:icon' || element.name.toString() == 'android:roundIcon')
-        ..add(XmlAttribute(XmlName('android:icon'), '@mipmap/ic_launcher'))
-        ..add(XmlAttribute(XmlName('android:roundIcon'), '@mipmap/ic_launcher_round'));
+        ..add(XmlAttribute(XmlName('android:icon'), '@mipmap/ic_launcher'))..add(
+          XmlAttribute(XmlName('android:roundIcon'), '@mipmap/ic_launcher_round'));
 
       androidManifestFile.writeAsStringSync(androidManifestXMLDocument.toXmlString(pretty: true, indent: '   '));
     } else {
@@ -152,9 +153,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
       foregroundItemBuilder.attribute('android:drawable', '@mipmap/ic_launcher_foreground');
     });
 
-    adaptiveIconElementChildren
-      ..add(backgroundItemBuilder.buildFragment())
-      ..add(foregroundItemBuilder.buildFragment());
+    adaptiveIconElementChildren..add(backgroundItemBuilder.buildFragment())..add(foregroundItemBuilder.buildFragment());
 
     launcherFile.writeAsStringSync(launcherFileDocument.toXmlString(pretty: true, indent: '   '));
 
@@ -167,7 +166,9 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     if (colorsFile.existsSync()) {
       logger('colors.xml existing already, add launcher background color');
       final colorsDocument = XmlDocument.parse(colorsFile.readAsStringSync());
-      final resources = colorsDocument.getElement('resources')?.name;
+      final resources = colorsDocument
+          .getElement('resources')
+          ?.name;
 
       try {
         final launcherBackground = resources?.parent?.children
