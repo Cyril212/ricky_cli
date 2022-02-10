@@ -15,7 +15,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
   final double _resizeAmount;
 
   AndroidAppIconController({required String backgroundColor, required Image customSourceImage})
-      : _resizeAmount = 0,
+      : _resizeAmount = 1,
         super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
 
   @experimental
@@ -67,7 +67,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     );
 
     //round
-    final croppedRoundImage = copyCropCircle(foregroundImage, radius: 160);
+    final croppedRoundImage = copyCropCircle(foregroundImage, radius: 144);
 
     final baseAlphaChannelRoundLayerImage = Image(192, 192);
 

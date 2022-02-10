@@ -63,7 +63,7 @@
       <recent name="$PROJECT_DIR$/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Dart Test.Test template generator in cli_test.dart">
+  <component name="RunManager" selected="Dart Command Line App.Dart App">
     <configuration name="Dart App" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="arguments" value="app_icon" />
       <option name="filePath" value="$PROJECT_DIR$/bin/ricky_cli.dart" />
