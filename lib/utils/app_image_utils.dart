@@ -21,6 +21,6 @@ class AppImageUtils {
   }
 
   static Image resizeImage({required Image image, required int width, required int height}) {
-    return copyResize(image, width: width, height: height, interpolation: Interpolation.linear);
+    return copyResize(image, width: width, height: height, interpolation: Interpolation.average);
   }
 }

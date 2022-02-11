@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:image/image.dart';
 import 'package:meta/meta.dart';
@@ -85,8 +84,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
   Image _croppedRoundImageFromSource(Image source) {
     final croppedImage = copyCropCircle(source, radius: 144);
-
-    return _croppedImageWithAlpha(croppedImage, 178, 178, 14, 14);
+    return _croppedImageWithAlpha(croppedImage, 178, 178, 6, 6);
   }
 
   Image _croppedImageWithAlpha(Image source, int resizedImageWidth, int resizedImageHeight, int paddingX, int paddingY) {

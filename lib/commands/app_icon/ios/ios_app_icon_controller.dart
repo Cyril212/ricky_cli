@@ -12,12 +12,17 @@ import '../../../utils/app_image_utils.dart';
 import '../base_app_icon_controller.dart';
 
 class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
+  final double _resizeAmount;
+
   IOSAppIconController({required String backgroundColor, required Image customSourceImage})
-      : super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
+      : _resizeAmount = 1,
+        super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
 
   @experimental
-  IOSAppIconController.custom({required String backgroundColor, required Image customSourceImage, ErrorHandler? errorHandler, String? rootPath})
-      : super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
+  IOSAppIconController.custom(
+      {required String backgroundColor, required Image customSourceImage, required resizeAmount, ErrorHandler? errorHandler, String? rootPath})
+      : _resizeAmount = resizeAmount,
+        super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
 
   @override
   String get platform => kiOSPlatform;
@@ -49,8 +54,15 @@ class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
   void generateAppIcon() {
     logger('Generating app icons');
 
+    final resizedBaseForegroundImage = copyResize(
+      customSourceImage,
+      width: (customSourceImage.width * _resizeAmount).toInt(),
+      height: (customSourceImage.height * _resizeAmount).toInt(),
+      interpolation: Interpolation.linear,
+    );
+
     for (var template in appIconList) {
-      AppImageUtils.saveImage(resFolder: getFullPath(kiOSAppIconsImageFolder), template: template, image: customSourceImage);
+      AppImageUtils.saveImage(resFolder: getFullPath(kiOSAppIconsImageFolder), template: template, image: resizedBaseForegroundImage);
     }
   }
 

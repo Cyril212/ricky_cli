@@ -34,8 +34,8 @@ const String kAndroidV21LaunchDarkBackgroundFile = kAndroidNightV21DrawableFolde
 const String kAndroidColorsFile = kAndroidResFolder + 'values/colors.xml';
 
 // iOS-related constants
-const String kiOSAppIconsImageFolder = 'ios/Runner/Assets.xcassets/AppIcons.imageset/';
-const String kiOSContentFile = 'ios/Runner/Assets.xcassets/AppIcons.imageset/Contents.json';
+const String kiOSAppIconsImageFolder = 'ios/Runner/Assets.xcassets/AppIcon.appiconset/';
+const String kiOSContentFile = 'ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json';
 
 const String kiOSAssetsLaunchImageFolder = 'ios/Runner/Assets.xcassets/LaunchImage.imageset/';
 const String kiOSLaunchScreenStoryboardFile = 'ios/Runner/Base.lproj/LaunchScreen.storyboard';
