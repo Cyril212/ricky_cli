@@ -44,7 +44,7 @@ class IOSAppIconController extends BaseAppIconController<IOSIconTemplateModel> {
         IOSIconTemplateModel(path: 'ic_launcher-76', size: 76.0),
         IOSIconTemplateModel(path: 'ic_launcher-76@2x', size: 156.0),
         IOSIconTemplateModel(path: 'ic_launcher-83.5@2x', size: 167.0),
-        IOSIconTemplateModel(path: 'ic_launcher-1024@2x', size: 1024.0),
+        IOSIconTemplateModel(path: 'ic_launcher-1024', size: 1024.0),
       ];
 
   @override
