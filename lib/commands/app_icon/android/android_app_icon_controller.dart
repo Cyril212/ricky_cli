@@ -205,7 +205,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
       final colorsFileDocument = colorsFileBuilder.buildDocument();
 
-      final colorsFileElement = colorsFileDocument.getElement('adaptive-icon');
+      final colorsFileElement = colorsFileDocument.getElement('resources');
 
       final List<XmlNode> colorsFileElementChildren = colorsFileElement!.children;
 
