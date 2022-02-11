@@ -59,27 +59,10 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
         dstX: paddingX, dstY: paddingY); //change padding depending on resizedBaseForegroundImage size
 
     //legacy
-    final resizedLegacyIcon = copyResize(
-      resizedBaseForegroundImage,
-      width: 192,
-      height: 192,
-      interpolation: Interpolation.average,
-    );
+    final resizedLegacyIcon = _croppedLegacyImageFromSource(foregroundImage, foregroundImage.width ~/ 2, foregroundImage.height ~/ 2, 288, 288);
 
     //round
-    final croppedRoundImage = copyCropCircle(foregroundImage, radius: 144);
-
-    final baseAlphaChannelRoundLayerImage = Image(192, 192);
-
-    final resizedRoundImage = copyResize(croppedRoundImage,
-      width: 178,
-      height: 178,
-      interpolation: Interpolation.average,);
-
-    final roundPaddingX = (192 - resizedRoundImage.width) ~/ 2;
-    final roundPaddingY = (192 - resizedRoundImage.height) ~/ 2;
-
-    final resizedRoundIcon = drawImage(baseAlphaChannelRoundLayerImage, resizedRoundImage, dstX: roundPaddingX, dstY: roundPaddingY);
+    final resizedRoundIcon = _croppedRoundImageFromSource(foregroundImage);
 
     for (var template in appIconList) {
       if (template.type == AndroidIconTemplateModelType.ic_launcher) {
@@ -90,6 +73,36 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
         AppImageUtils.saveImage(resFolder: getFullPath(kAndroidResFolder), template: template, image: foregroundImage);
       }
     }
+  }
+
+  Image _croppedLegacyImageFromSource(Image source, int x, int y, int width, int height) {
+    final tlx = x - 144; //topLeft.x
+    final tly = y - 144; //topLeft.y
+
+    final croppedImage = copyCrop(source, tlx, tly, width, height);
+    return _croppedImageWithAlpha(croppedImage, 150, 150, 20, 20);
+  }
+
+  Image _croppedRoundImageFromSource(Image source) {
+    final croppedImage = copyCropCircle(source, radius: 144);
+
+    return _croppedImageWithAlpha(croppedImage, 178, 178, 14, 14);
+  }
+
+  Image _croppedImageWithAlpha(Image source, int resizedImageWidth, int resizedImageHeight, int paddingX, int paddingY) {
+    final baseAlphaChannelLayerImage = Image(192, 192);
+
+    final resizedRoundImage = copyResize(
+      source,
+      width: resizedImageWidth,
+      height: resizedImageHeight,
+      interpolation: Interpolation.average,
+    );
+
+    final roundPaddingX = paddingX;
+    final roundPaddingY = paddingY;
+
+    return drawImage(baseAlphaChannelLayerImage, resizedRoundImage, dstX: roundPaddingX, dstY: roundPaddingY);
   }
 
   @override
@@ -103,8 +116,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     final androidManifestFile = File(getFullPath(kAndroidManifestFile));
     if (androidManifestFile.existsSync()) {
       final androidManifestXMLDocument = XmlDocument.parse(androidManifestFile.readAsStringSync());
-      final applicationElement = androidManifestXMLDocument.getElement('manifest')
-        ?..getElement('application');
+      final applicationElement = androidManifestXMLDocument.getElement('manifest')?..getElement('application');
 
       if (applicationElement == null) {
         throw CliException('$platform application element was not found. Exit.');
@@ -112,8 +124,8 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
       applicationElement.attributes
         ..removeWhere((element) => element.name.toString() == 'android:icon' || element.name.toString() == 'android:roundIcon')
-        ..add(XmlAttribute(XmlName('android:icon'), '@mipmap/ic_launcher'))..add(
-          XmlAttribute(XmlName('android:roundIcon'), '@mipmap/ic_launcher_round'));
+        ..add(XmlAttribute(XmlName('android:icon'), '@mipmap/ic_launcher'))
+        ..add(XmlAttribute(XmlName('android:roundIcon'), '@mipmap/ic_launcher_round'));
 
       androidManifestFile.writeAsStringSync(androidManifestXMLDocument.toXmlString(pretty: true, indent: '   '));
     } else {
@@ -153,7 +165,9 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
       foregroundItemBuilder.attribute('android:drawable', '@mipmap/ic_launcher_foreground');
     });
 
-    adaptiveIconElementChildren..add(backgroundItemBuilder.buildFragment())..add(foregroundItemBuilder.buildFragment());
+    adaptiveIconElementChildren
+      ..add(backgroundItemBuilder.buildFragment())
+      ..add(foregroundItemBuilder.buildFragment());
 
     launcherFile.writeAsStringSync(launcherFileDocument.toXmlString(pretty: true, indent: '   '));
 
@@ -166,9 +180,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     if (colorsFile.existsSync()) {
       logger('colors.xml existing already, add launcher background color');
       final colorsDocument = XmlDocument.parse(colorsFile.readAsStringSync());
-      final resources = colorsDocument
-          .getElement('resources')
-          ?.name;
+      final resources = colorsDocument.getElement('resources')?.name;
 
       try {
         final launcherBackground = resources?.parent?.children

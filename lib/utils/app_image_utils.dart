@@ -20,6 +20,7 @@ class AppImageUtils {
       ..writeAsBytesSync(encodePng(resizedBaseImage));
   }
 
-  static Image resizeImage({required Image image, required int width, required int height}) =>
-      copyResize(image, width: width, height: height, interpolation: Interpolation.average);
+  static Image resizeImage({required Image image, required int width, required int height}) {
+    return copyResize(image, width: width, height: height, interpolation: Interpolation.linear);
+  }
 }

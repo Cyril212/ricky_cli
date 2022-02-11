@@ -26,6 +26,7 @@ dependencies:
   colorize: ^3.0.0
   enum_to_string: ^2.0.1
   antlr4: 4.9.3
+  bitmap: ^0.1.2
 
 #dependencies:
 #  path: ^1.7.0
