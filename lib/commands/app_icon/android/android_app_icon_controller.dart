@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:math';
 import 'package:image/image.dart';
 import 'package:meta/meta.dart';
 import 'package:ricky_cli/core/base_controller.dart';
@@ -11,16 +11,16 @@ import '../../../utils/exceptions/cli_exception.dart';
 import '../base_app_icon_controller.dart';
 
 class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplateModel> {
-  final double _resizeAmount;
+  final double _resizePercentage;
 
   AndroidAppIconController({required String backgroundColor, required Image customSourceImage})
-      : _resizeAmount = 1,
+      : _resizePercentage = 1,
         super(backgroundColor: backgroundColor, customSourceImage: customSourceImage);
 
   @experimental
   AndroidAppIconController.custom(
-      {required String backgroundColor, required Image customSourceImage, required resizeAmount, ErrorHandler? errorHandler, String? rootPath})
-      : _resizeAmount = resizeAmount,
+      {required String backgroundColor, required Image customSourceImage, required resizePercentage, ErrorHandler? errorHandler, String? rootPath})
+      : _resizePercentage = resizePercentage,
         super.custom(backgroundColor: backgroundColor, customSourceImage: customSourceImage, errorHandler: errorHandler, rootPath: rootPath);
 
   @override
@@ -38,24 +38,37 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
       ]);
 
   @override
-  void generateAppIcon() {
+  void generateAppIcon() async {
     logger('Generating icons');
 
+    if (customSourceImage.height != 512 && customSourceImage.width != 512) {
+      ///Resize source image to xxxhdpi
+      customSourceImage = copyResize(
+        customSourceImage,
+        width: 512,
+        height: 512,
+        interpolation: Interpolation.average,
+      );
+    }
+
     //foreground
+    // Create alpha layer for xxxhdpi foreground icon (the biggest dimension in android)
+    final baseAlphaChannelLayerImage = Image(432, 432);
+
+    //Resized source image by resize percentage
     final resizedBaseForegroundImage = copyResize(
       customSourceImage,
-      width: (customSourceImage.width * _resizeAmount).toInt(),
-      height: (customSourceImage.height * _resizeAmount).toInt(),
+      width: (288 * _resizePercentage).toInt(),
+      height: (288 * _resizePercentage).toInt(),
       interpolation: Interpolation.average,
     );
 
-    final baseAlphaChannelLayerImage = Image(432, 432);
+    // Define paddings for [resizedBaseForegroundImage]
+    final paddingX = (432 - resizedBaseForegroundImage.width) ~/ 2;
+    final paddingY = (432 - resizedBaseForegroundImage.height) ~/ 2;
 
-    final paddingX = resizedBaseForegroundImage.width < 432 ? (432 - resizedBaseForegroundImage.width) ~/ 2 : 0;
-    final paddingY = resizedBaseForegroundImage.height < 432 ? (432 - resizedBaseForegroundImage.height) ~/ 2 : 0;
-
-    final foregroundImage = drawImage(baseAlphaChannelLayerImage, resizedBaseForegroundImage,
-        dstX: paddingX, dstY: paddingY); //change padding depending on resizedBaseForegroundImage size
+    final foregroundImage = drawImage(baseAlphaChannelLayerImage, resizedBaseForegroundImage, dstX: paddingX, dstY: paddingY);
+    //change padding depending on resizedBaseForegroundImage size
 
     //legacy
     final resizedLegacyIcon = _croppedLegacyImageFromSource(foregroundImage, foregroundImage.width ~/ 2, foregroundImage.height ~/ 2, 288, 288);
@@ -107,7 +120,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
   void executeConfigurationProcess() {
     _generateAdaptiveIconXml();
     _applyIconParametersToManifest();
-    _addBackgroundColor(backgroundColor!);
+    _addBackgroundColor();
   }
 
   void _applyIconParametersToManifest() {
@@ -146,16 +159,16 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
 
     launcherFileBuilder
       ..processing('xml', 'version="1.0" encoding="utf-8"')
-      ..element('adaptive-icon')
-      ..attribute('xmlns:android', 'http://schemas.android.com/apk/res/android');
+      ..element('adaptive-icon');
     final launcherFileDocument = launcherFileBuilder.buildDocument();
 
-    final adaptiveIconElement = launcherFileDocument.getElement('adaptive-icon');
-    final List<XmlNode> adaptiveIconElementChildren = adaptiveIconElement!.children;
+    final adaptiveIconElement = launcherFileDocument.getElement('adaptive-icon')!
+      ..setAttribute('xmlns:android', 'http://schemas.android.com/apk/res/android');
+    final List<XmlNode> adaptiveIconElementChildren = adaptiveIconElement.children;
 
     final backgroundItemBuilder = XmlBuilder();
     backgroundItemBuilder.element('background', nest: () {
-      backgroundItemBuilder.attribute('android:drawable', '@colors/launcherBackground');
+      backgroundItemBuilder.attribute('android:drawable', '@color/launcherBackground');
     });
 
     final foregroundItemBuilder = XmlBuilder();
@@ -173,7 +186,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
     launcherFile.copySync(getFullPath(kAndroidLauncherRound));
   }
 
-  void _addBackgroundColor(String backgroundColor) {
+  void _addBackgroundColor() {
     final colorsFile = File(getFullPath(kAndroidColorsFile));
     if (colorsFile.existsSync()) {
       logger('colors.xml existing already, add launcher background color');
@@ -181,15 +194,15 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
       final resources = colorsDocument.getElement('resources')?.name;
 
       try {
-        final launcherBackground = resources?.parent?.children
-            .firstWhere((element) => (element.attributes.any((attribute) => attribute.name.toString() == 'launcherBackground')));
+        final launcherBackground =
+            resources?.parent?.children.firstWhere((element) => element.attributes.any((attribute) => attribute.value == 'launcherBackground'));
 
-        launcherBackground?.innerText = backgroundColor;
+        launcherBackground?.innerText = backgroundColor!;
       } on StateError {
         logger('launcherBackground was not found in colors.xml. Adding lancherBackground color.');
 
         resources?.parent?.children
-            .add(XmlElement(XmlName('color'), [XmlAttribute(XmlName('name'), 'launcherBackground')], [XmlText(backgroundColor)]));
+            .add(XmlElement(XmlName('color'), [XmlAttribute(XmlName('name'), 'launcherBackground')], [XmlText(backgroundColor!)]));
 
         colorsFile.writeAsStringSync(colorsDocument.toXmlString(pretty: true, indent: '    '));
       }
@@ -211,7 +224,7 @@ class AndroidAppIconController extends BaseAppIconController<AndroidIconTemplate
       backgroundItemBuilder.element('color', nest: () {
         backgroundItemBuilder
           ..attribute('name', 'launcherBackground')
-          ..text(backgroundColor);
+          ..text(backgroundColor!);
       });
 
       colorsFileElementChildren.add(backgroundItemBuilder.buildFragment());

@@ -24,10 +24,10 @@ class IOSSplashController extends BaseSplashController<IOSIconTemplateModel> {
 
   @override
   List<IOSIconTemplateModel> get splashIconList => <IOSIconTemplateModel>[
-        IOSIconTemplateModel(path: 'LaunchImage', dimens: 1.0),
-        IOSIconTemplateModel(path: 'LaunchImage@2x', dimens: 2.0),
-        IOSIconTemplateModel(path: 'LaunchImage@3x', dimens: 3.0),
-      ];
+    IOSIconTemplateModel(path: 'LaunchImage', dimens: 1.0),
+    IOSIconTemplateModel(path: 'LaunchImage@2x', dimens: 2.0),
+    IOSIconTemplateModel(path: 'LaunchImage@3x', dimens: 3.0),
+  ];
 
   @override
   void applySplashBackground() {

@@ -6,7 +6,6 @@ import 'package:ricky_cli/core/base_controller.dart';
 import 'package:xml/xml.dart';
 
 import '../../../core/models/icon_template_model.dart';
-import '../../../core/logger.dart';
 
 import 'android_version.dart';
 import '../../../utils/app_image_utils.dart';
@@ -26,12 +25,12 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
 
   @override
   List<AndroidIconTemplateModel> get splashIconList => AndroidIconTemplateModel.generateSplashIconTemplateModelList(<AndroidIconTemplateModel>[
-        AndroidIconTemplateModel(path: 'drawable-mdpi', dimens: 1.0),
-        AndroidIconTemplateModel(path: 'drawable-hdpi', dimens: 1.5),
-        AndroidIconTemplateModel(path: 'drawable-xhdpi', dimens: 2.0),
-        AndroidIconTemplateModel(path: 'drawable-xxhdpi', dimens: 3.0),
-        AndroidIconTemplateModel(path: 'drawable-xxxhdpi', dimens: 4.0),
-      ]);
+    AndroidIconTemplateModel(path: 'drawable-mdpi', dimens: 1.0),
+    AndroidIconTemplateModel(path: 'drawable-hdpi', dimens: 1.5),
+    AndroidIconTemplateModel(path: 'drawable-xhdpi', dimens: 2.0),
+    AndroidIconTemplateModel(path: 'drawable-xxhdpi', dimens: 3.0),
+    AndroidIconTemplateModel(path: 'drawable-xxxhdpi', dimens: 4.0),
+  ]);
 
   @override
   void applySplashBackground() {
@@ -58,7 +57,7 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
         launchBackgroundDocumentBuilder
           ..attribute('xmlns:android', 'http://schemas.android.com/apk/res/android')
           ..element('item', nest: () {
-            launchBackgroundDocumentBuilder.attribute('android:drawable', '@colors/backgroundColor');
+            launchBackgroundDocumentBuilder.attribute('android:drawable', '@color/backgroundColor');
           });
       });
 
@@ -83,31 +82,54 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
 
   void _createBackgroundColor() {
     logger('Creating colors.xml');
+
     final launchColorsFile = File(getFullPath(kAndroidColorsFile));
+    if (launchColorsFile.existsSync()) {
+      logger('colors.xml existing already, add launcher background color');
+      final colorsDocument = XmlDocument.parse(launchColorsFile.readAsStringSync());
+      final resources = colorsDocument.getElement('resources')?.name;
 
-    launchColorsFile.createSync(recursive: true);
+      try {
+        final launcherBackground =
+        resources?.parent?.children.firstWhere((element) => (element.attributes.any((attribute) => attribute.value == 'backgroundColor')));
 
-    logger('Adding background color');
+        launcherBackground?.innerText = backgroundColor!;
+      } on StateError {
+        logger('launcherBackground was not found in colors.xml. Adding lancherBackground color.');
 
-    final launchColorDocumentBuilder = XmlBuilder();
+        resources?.parent?.children
+            .add(XmlElement(XmlName('color'), [XmlAttribute(XmlName('name'), 'backgroundColor')], [XmlText(backgroundColor!)]));
 
-    launchColorDocumentBuilder
-      ..processing('xml', 'version="1.0" encoding="utf-8"')
-      ..element('resources');
-    final launchColorDocument = launchColorDocumentBuilder.buildDocument();
+        launchColorsFile.writeAsStringSync(colorsDocument.toXmlString(pretty: true, indent: '    '));
+      }
+    } else {
+      logger("colors.xml doesn't exist, create file and add background color");
 
-    final resources = launchColorDocument.getElement('resources');
-    final List<XmlNode> items = resources!.children;
+      launchColorsFile.createSync(recursive: true);
 
-    final colorItemBuilder = XmlBuilder();
-    colorItemBuilder.element('color', nest: () {
-      colorItemBuilder.attribute('name', 'backgroundColor');
-      colorItemBuilder.text(backgroundColor!);
-    });
+      logger("colors.xml doesn't exist, create file and add launcher background color");
+      launchColorsFile.createSync(recursive: true);
 
-    items.add(colorItemBuilder.buildFragment());
+      final colorsFileBuilder = XmlBuilder()
+        ..processing('xml', 'version="1.0" encoding="utf-8"')
+        ..element('resources');
 
-    launchColorsFile.writeAsStringSync(launchColorDocument.toXmlString(pretty: true, indent: '   '));
+      final colorsFileDocument = colorsFileBuilder.buildDocument();
+
+      final colorsFileElement = colorsFileDocument.getElement('resources');
+
+      final List<XmlNode> colorsFileElementChildren = colorsFileElement!.children;
+
+      final backgroundItemBuilder = XmlBuilder();
+      backgroundItemBuilder.element('color', nest: () {
+        backgroundItemBuilder
+          ..attribute('name', 'backgroundColor')
+          ..text(backgroundColor!);
+      });
+
+      colorsFileElementChildren.add(backgroundItemBuilder.buildFragment());
+      launchColorsFile.writeAsStringSync(colorsFileDocument.toXmlString(pretty: true, indent: '   '));
+    }
 
     _applyStylesXml(androidVersion: AndroidVersion.v30_and_lower, fullScreen: true, file: getFullPath(kAndroidStylesFile));
     _applyStylesXml(androidVersion: AndroidVersion.v31, fullScreen: true, file: getFullPath(kAndroidV31StylesFile));
@@ -162,12 +184,12 @@ class AndroidSplashController extends BaseSplashController<AndroidIconTemplateMo
             case AndroidVersion.v30_and_lower:
               launchThemeBuilder
                 ..attribute('name', 'android:windowBackground')
-                ..text(name == 'LaunchTheme' ? '@drawable/launch_background' : '@colors/backgroundColor');
+                ..text(name == 'LaunchTheme' ? '@drawable/launch_background' : '@color/backgroundColor');
               break;
             case AndroidVersion.v31:
               launchThemeBuilder
                 ..attribute('name', 'android:windowSplashScreenBackground')
-                ..text(name == 'LaunchTheme' ? '@drawable/launch_background' : '@colors/backgroundColor');
+                ..text(name == 'LaunchTheme' ? '@drawable/launch_background' : '@color/backgroundColor');
               break;
           }
         });

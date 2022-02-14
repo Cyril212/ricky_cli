@@ -45,7 +45,7 @@ class AppIconCommand extends BaseCommand<AppIconCommand> {
           }
         });
 
-    return Future.value(null);
+    return Future.value();
   }
 
   Future _executeAppIconGeneration({required String backgroundColor, required Image customSourceImage}) async {
