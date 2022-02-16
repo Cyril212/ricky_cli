@@ -1,9 +1,5 @@
-import 'dart:io';
-
-import 'package:image/image.dart';
 import 'package:meta/meta.dart';
 import '../core/logger.dart';
-import '../utils/exceptions/cli_exception.dart';
 
 typedef ErrorHandler = Function(Exception e);
 

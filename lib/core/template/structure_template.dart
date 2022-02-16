@@ -9,7 +9,7 @@ import 'snippet/policy/sample/constants/constants_snippet_policy.dart';
 
 class SampleTemplate extends StructureTemplate {
   final List<BaseSnippetPolicy> fileSnippets = [
-    AppConstantSnippetPolicy(arguments: AppConstantSnippetPolicyArgs(appName: "SampleName")),
+    AppConstantSnippetPolicy(arguments: AppConstantSnippetPolicyArgs(appName: 'SampleName')),
     TextConstantSnippetPolicy(),
     ThemeConstantSnippetPolicy(arguments: ThemeConstantSnippetPolicyArgs(primaryColor: 'FFF444', secondaryColor: '000444', shadowColor: '00000F'))
   ];

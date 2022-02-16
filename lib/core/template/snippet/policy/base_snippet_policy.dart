@@ -16,7 +16,6 @@ abstract class BaseSnippetPolicy<T extends BaseSnippetPolicyArgs> {
   @protected
   String get classNameSection;
 
-  @protected
   String get topLevelVariableSection;
 
   @protected
@@ -28,12 +27,10 @@ abstract class BaseSnippetPolicy<T extends BaseSnippetPolicyArgs> {
   @protected
   T? arguments;
 
-  @protected
   String? process() {
-
     return snippet
-      ?.replaceAll(_classNamePlaceholder, classNameSection)
-      .replaceAll(_topLevelVariablePlaceholder, topLevelVariableSection)
-      .replaceAll(_functionPlaceholder, _functionPlaceholder);
+        ?.replaceAll(_classNamePlaceholder, classNameSection)
+        .replaceAll(_topLevelVariablePlaceholder, topLevelVariableSection)
+        .replaceAll(_functionPlaceholder, _functionPlaceholder);
   }
 }

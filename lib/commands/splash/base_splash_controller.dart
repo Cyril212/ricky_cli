@@ -1,7 +1,6 @@
 import 'package:image/image.dart';
 import 'package:meta/meta.dart';
 import 'package:ricky_cli/core/logger.dart';
-import '../../core/constants.dart';
 import '../../core/base_controller.dart';
 import '../../core/models/icon_template_model.dart';
 

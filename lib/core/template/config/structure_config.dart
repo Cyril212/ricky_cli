@@ -4,7 +4,6 @@ import 'package:meta/meta.dart';
 import 'package:ricky_cli/utils/exceptions/cli_exception.dart';
 import 'package:yaml/yaml.dart';
 
-import '../../logger.dart';
 import '../structure_template.dart';
 
 class InMemoryConfig extends StructureConfig<List<StructureElement>> {

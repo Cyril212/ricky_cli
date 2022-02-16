@@ -7,6 +7,14 @@
     <list default="true" id="37002b5a-dd52-435c-92c4-f5df250f6c33" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/commands/app_icon/android/android_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/android/android_app_icon_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/commands/app_icon/base_app_icon_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/app_icon/base_app_icon_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/commands/splash/base_splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commands/splash/base_splash_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/base_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/base_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/cli_communication_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/cli_communication_client.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/config/structure_config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/config/structure_config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/snippet/policy/base_snippet_policy.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/snippet/policy/base_snippet_policy.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/template/structure_template.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/template/structure_template.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/extensions/string.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/extensions/string.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +159,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/commands/app_icon/base_app_icon_controller.dart</url>
-          <line>42</line>
+          <line>39</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -226,12 +234,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/core/template/config/structure_config.dart</url>
-          <line>23</line>
+          <line>22</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/core/template/snippet/policy/base_snippet_policy.dart</url>
-          <line>33</line>
+          <line>30</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
       </breakpoints>
