@@ -19,7 +19,7 @@ class HelpCommand extends BaseCommand<HelpCommand> {
   String? get description => 'List of commands';
 
   String get _localPath {
-    final directory = findFolderByName('commands/help', 'logo');
+    final directory = findFolderByName('lib/commands/help', 'logo');
     return directory?.path ?? '';
   }
 
