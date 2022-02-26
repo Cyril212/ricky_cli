@@ -12,7 +12,7 @@
 
 
 ## 🗒 Description
-Light-weighted CLI created to simplify early development stage for Flutter developers.
+Lightwight CLI created to simplify early development stage for Flutter developers.
 
 ## 🚀 Features
 - Generation Splash screen 
