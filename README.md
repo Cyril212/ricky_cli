@@ -38,7 +38,4 @@ help - List of commands
 app_icon - Generate app icons
 splash - Generate native splash screen
 
-
-Process finished with exit code 0
-
 ```
