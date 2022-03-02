@@ -11,9 +11,8 @@ class TemplateGenerator {
     _template.structure.then((element) {
       element.forEach((element) {
         var currentFile = File(element.path)..createSync(recursive: true);
-        final sample = SampleTemplate.fromConfig();
 
-        final content = sample.fileSnippets.where((snippet) => element.tag == snippet.tag).first.process();
+        final content = _template.fileSnippets.firstWhere((snippet) => element.tag == snippet.tag).process();
         currentFile.writeAsStringSync(content!);
       });
     });

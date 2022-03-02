@@ -1,12 +1,25 @@
+import 'package:ricky_cli/commands/create/create_controller.dart';
+import 'package:ricky_cli/core/dialog_interactor.dart';
+
 import '../../core/base_command.dart';
 
 class CreateCommand extends BaseCommand<CreateCommand> {
-
   @override
   String? get description => 'Create new Flutter project';
 
   @override
   Future<void> executionBlock() async {
-    return null;
+    DialogInteractor.instance.platformAwareInteraction(
+        questions: [
+          ['Type in application name', 'appName'],
+          ['Type in package name (com.example)', 'appPackage'],
+          ['Type in description', 'appDescription'],
+          ['Type in primary color (#000000)', 'primaryColor'],
+          ['Type in secondary color (#000000)', 'secondaryColor']
+        ],
+        onAnswer: (answer) {},
+        onPlatformAnswer: (platform, answer) {
+          CreateController(parameters: answer, chosenPlatform: platform).execute();
+        });
   }
 }

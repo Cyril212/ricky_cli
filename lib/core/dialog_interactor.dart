@@ -19,7 +19,6 @@ class DialogInteractor {
     ]);
 
     final dialogAnswers = dialog.ask();
-
     onAnswer(dialogAnswers);
 
     final chosenPlatformPreference = Platform.values.firstWhere((platform) => platform.index == optionAnswer(dialogAnswers['platformPreference']));

@@ -1,14 +1,11 @@
 import 'dart:io';
 
 /// find a folder from the name in the lib folder
-Directory? findFolderByName(String root, String name) {
-  var current = Directory(root);
-  final list = current.listSync(recursive: true, followLinks: false);
-  final contains = list.firstWhere((element) {
-    if (element is Directory) {
-      return element.path.contains(name);
-    }
-    return false;
-  });
-  return contains as Directory?;
+File findFileByName(String root, String name) {
+  final completePath = root + name;
+  var path = Uri.parse('.').resolveUri(Uri.file(completePath)).toFilePath();
+  print(path);
+  if (path == '') path = '.';
+
+  return File(path);
 }

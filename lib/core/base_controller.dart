@@ -5,7 +5,7 @@ typedef ErrorHandler = Function(Exception e);
 
 abstract class BaseController<T> {
   @protected
-  String get platform;
+  String? get platform => null;
 
   @protected
   ErrorHandler? errorHandler;

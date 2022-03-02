@@ -1,22 +1,34 @@
-import 'dart:io';
-
 import 'package:meta/meta.dart';
 import 'package:ricky_cli/core/template/snippet/policy/base_snippet_policy.dart';
+import 'package:ricky_cli/core/template/snippet/policy/bloc/utils/logger_snippet.dart';
 
 import 'in_memory/in_memory_config.dart';
 import 'config/structure_config.dart';
-import 'snippet/policy/sample/constants/constants_snippet_policy.dart';
+import 'snippet/policy/bloc/constants/constants_snippet_policy.dart';
 
 class SampleTemplate extends StructureTemplate {
-  final List<BaseSnippetPolicy> fileSnippets = [
-    AppConstantSnippetPolicy(arguments: AppConstantSnippetPolicyArgs(appName: 'SampleName')),
-    TextConstantSnippetPolicy(),
-    ThemeConstantSnippetPolicy(arguments: ThemeConstantSnippetPolicyArgs(primaryColor: 'FFF444', secondaryColor: '000444', shadowColor: '00000F'))
-  ];
+  final String appName;
+  final String? primaryColor;
+  final String? secondaryColor;
 
-  SampleTemplate.fromMemory() : super(source: InMemoryConfig(content: kBlocInMemoryConfig));
+  SampleTemplate({required this.appName, this.primaryColor, this.secondaryColor, required String source}) : super(source: source);
 
-  SampleTemplate.fromConfig() : super(source: FileConfig(path: 'lib/core/template/file/sample_config.yaml'));
+  SampleTemplate.fromMemory({
+    required this.appName,
+    this.primaryColor,
+    this.secondaryColor,
+  }) : super(source: InMemoryConfig(content: kBlocInMemoryConfig));
+
+  @override
+  List<BaseSnippetPolicy> get fileSnippets => [
+        AppConstantSnippetPolicy(arguments: AppConstantSnippetPolicyArgs(appName: appName)),
+        ThemeConstantSnippetPolicy(
+            arguments: ThemeConstantSnippetPolicyArgs(
+          primaryColor: primaryColor,
+          secondaryColor: secondaryColor,
+        )),
+        LoggerSnippetPolicy()
+      ];
 }
 
 class StructureElement {
@@ -36,27 +48,9 @@ class StructureTemplate {
   @protected
   final StructureConfig _source;
 
-  List<StructureElement>? _structure;
-
   StructureTemplate({required source}) : _source = source;
 
   Future<List<StructureElement>> get structure => _source.retrieveStructure();
 
-  bool _isPathAvailable(String path) => _structure != null && _structure!.contains(path);
-
-  Directory? getDirectory(String path) {
-    if (_isPathAvailable(path)) {
-      return Directory(path);
-    } else {
-      return null;
-    }
-  }
-
-  File? getFile(String path) {
-    if (_isPathAvailable(path)) {
-      return File(path);
-    } else {
-      return null;
-    }
-  }
+  List<BaseSnippetPolicy> get fileSnippets => [];
 }

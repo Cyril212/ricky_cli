@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:meta/meta.dart';
+import 'package:ricky_cli/core/logger.dart';
 import 'package:ricky_cli/utils/exceptions/cli_exception.dart';
 import 'package:yaml/yaml.dart';
 
@@ -18,6 +19,7 @@ class FileConfig extends StructureConfig<String> {
 
   @override
   Future<List<StructureElement>> retrieveStructure() {
+    Logger.debug(message: source);
     final yamlConfig = File(source);
 
     if (yamlConfig.existsSync() == false) {
