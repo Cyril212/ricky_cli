@@ -12,12 +12,12 @@
 
 
 ## 🗒 Description
-Light-weighted CLI created to simplify early development stage for Flutter developers.
+Lightwight CLI created to simplify early development stage for Flutter developers.
 
 ## 🚀 Features
-- Generation Splash screen 
-- Generation App Icons
-- Creating project with predefined architecure by templates. (In progress)
+- Generate Splash screen 
+- Generate Launcher Icon
+- Create project with predefined architecure by templates. (In progress)
 
 ## 🔨 Usage
 ```dart
@@ -34,11 +34,8 @@ Usage:
 ricky_cli [command...]
 
 Commands: 
-help - List of commands
-app_icon - Generate app icons
 splash - Generate native splash screen
-
-
-Process finished with exit code 0
+launcher_icon - Generate app icons
+help - List of commands
 
 ```
