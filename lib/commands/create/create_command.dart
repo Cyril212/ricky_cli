@@ -14,8 +14,6 @@ class CreateCommand extends BaseCommand<CreateCommand> {
           ['Type in application name', 'appName'],
           ['Type in package name (com.example)', 'appPackage'],
           ['Type in description', 'appDescription'],
-          ['Type in primary color (#000000)', 'primaryColor'],
-          ['Type in secondary color (#000000)', 'secondaryColor']
         ],
         onAnswer: (answer) {},
         onPlatformAnswer: (platform, answer) {

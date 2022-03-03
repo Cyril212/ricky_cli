@@ -1,5 +1,5 @@
 import 'package:ricky_cli/core/base_controller.dart';
-import 'package:ricky_cli/core/template/structure_template.dart';
+import 'package:ricky_cli/core/template/template.dart';
 import 'package:ricky_cli/core/template/template_generator.dart';
 import 'package:process_run/shell.dart';
 

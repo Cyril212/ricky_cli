@@ -1,12 +1,12 @@
 import 'package:meta/meta.dart';
+import 'package:ricky_cli/core/template/config/specitifactions/template_specification.dart';
 import 'package:ricky_cli/core/template/snippet/policy/base_snippet_policy.dart';
 import 'package:ricky_cli/core/template/snippet/policy/bloc/utils/logger_snippet.dart';
 
-import 'in_memory/in_memory_config.dart';
-import 'config/structure_config.dart';
+import 'config/template_config.dart';
 import 'snippet/policy/bloc/constants/constants_snippet_policy.dart';
 
-class SampleTemplate extends StructureTemplate {
+class SampleTemplate extends Template {
   final String appName;
   final String? primaryColor;
   final String? secondaryColor;
@@ -17,7 +17,7 @@ class SampleTemplate extends StructureTemplate {
     required this.appName,
     this.primaryColor,
     this.secondaryColor,
-  }) : super(source: InMemoryConfig(content: kBlocInMemoryConfig));
+  }) : super(source: InMemoryConfig(content: kBlocTemplateSpecification));
 
   @override
   List<BaseSnippetPolicy> get fileSnippets => [
@@ -31,26 +31,26 @@ class SampleTemplate extends StructureTemplate {
       ];
 }
 
-class StructureElement {
+class TemplateElement {
   final String path;
   final String tag;
 
-  const StructureElement({required this.path, required this.tag});
+  const TemplateElement({required this.path, required this.tag});
 
   @override
   bool operator ==(Object other) {
-    if (other is! StructureElement) return false;
+    if (other is! TemplateElement) return false;
     return path == other.path && tag == other.tag;
   }
 }
 
-class StructureTemplate {
+class Template {
   @protected
-  final StructureConfig _source;
+  final TemplateConfig _source;
 
-  StructureTemplate({required source}) : _source = source;
+  Template({required source}) : _source = source;
 
-  Future<List<StructureElement>> get structure => _source.retrieveStructure();
+  Future<List<TemplateElement>> get structure => _source.retrieveStructure();
 
   List<BaseSnippetPolicy> get fileSnippets => [];
 }

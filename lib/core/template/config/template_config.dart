@@ -5,20 +5,20 @@ import 'package:ricky_cli/core/logger.dart';
 import 'package:ricky_cli/utils/exceptions/cli_exception.dart';
 import 'package:yaml/yaml.dart';
 
-import '../structure_template.dart';
+import '../template.dart';
 
-class InMemoryConfig extends StructureConfig<List<StructureElement>> {
-  InMemoryConfig({required List<StructureElement> content}) : super(source: content);
+class InMemoryConfig extends TemplateConfig<List<TemplateElement>> {
+  InMemoryConfig({required List<TemplateElement> content}) : super(source: content);
 
   @override
-  Future<List<StructureElement>> retrieveStructure() => Future.value(source);
+  Future<List<TemplateElement>> retrieveStructure() => Future.value(source);
 }
 
-class FileConfig extends StructureConfig<String> {
+class FileConfig extends TemplateConfig<String> {
   FileConfig({required path}) : super(source: path);
 
   @override
-  Future<List<StructureElement>> retrieveStructure() {
+  Future<List<TemplateElement>> retrieveStructure() {
     Logger.debug(message: source);
     final yamlConfig = File(source);
 
@@ -31,25 +31,25 @@ class FileConfig extends StructureConfig<String> {
     final YamlMap yamlStructure = loadYaml(yamlConfigAsString);
 
     final structureElementList = (yamlStructure['structure'] as YamlList).value;
-    return Future.value(structureElementList.map((structure) => StructureElement(path: structure['path'], tag: structure['tag'])).toList());
+    return Future.value(structureElementList.map((structure) => TemplateElement(path: structure['path'], tag: structure['tag'])).toList());
   }
 }
 
-class WebConfig extends StructureConfig<String> {
+class WebConfig extends TemplateConfig<String> {
   WebConfig({required path}) : super(source: path);
 
   @override
-  Future<List<StructureElement>> retrieveStructure() {
+  Future<List<TemplateElement>> retrieveStructure() {
     //todo:implement fetching config from server
     return Future.value([]);
   }
 }
 
-abstract class StructureConfig<T> {
+abstract class TemplateConfig<T> {
   @protected
   final T source;
 
-  StructureConfig({required source, path}) : source = source;
+  TemplateConfig({required source, path}) : source = source;
 
-  Future<List<StructureElement>> retrieveStructure();
+  Future<List<TemplateElement>> retrieveStructure();
 }

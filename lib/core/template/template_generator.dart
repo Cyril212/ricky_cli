@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:ricky_cli/core/template/structure_template.dart';
+import 'package:ricky_cli/core/template/template.dart';
 
 class TemplateGenerator {
-  final StructureTemplate _template;
+  final Template _template;
 
   const TemplateGenerator({required template}) : _template = template;
 

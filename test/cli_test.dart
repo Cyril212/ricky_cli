@@ -5,9 +5,9 @@ import 'package:ricky_cli/commands/app_icon/android/android_app_icon_controller.
 import 'package:ricky_cli/commands/app_icon/ios/ios_app_icon_controller.dart';
 import 'package:ricky_cli/commands/splash/android/android_splash_controller.dart';
 import 'package:ricky_cli/core/constants.dart';
-import 'package:ricky_cli/core/template/structure_template.dart';
-import 'package:ricky_cli/core/template/config/structure_config.dart';
-import 'package:ricky_cli/core/template/in_memory/in_memory_config.dart';
+import 'package:ricky_cli/core/template/template.dart';
+import 'package:ricky_cli/core/template/config/template_config.dart';
+import 'package:ricky_cli/core/template/in_memory/in_memory_config_specification.dart';
 import 'package:ricky_cli/core/template/template_generator.dart';
 import 'package:test/test.dart';
 import 'package:collection/collection.dart';
@@ -63,23 +63,23 @@ void main() {
 
   group('Structure templates tests', () {
     test('can read in memory structure config', () async {
-      final inMemoryTemplate = StructureTemplate(source: InMemoryConfig(content: kBlocInMemoryConfig));
+      final inMemoryTemplate = Template(source: InMemoryConfig(content: kBlocInMemoryConfig));
 
       final structure = await inMemoryTemplate.structure;
 
-      final expectedStructure = kBlocInMemoryConfig.map((element) => StructureElement(path: element.path, tag: '')).toList();
+      final expectedStructure = kBlocInMemoryConfig.map((element) => TemplateElement(path: element.path, tag: '')).toList();
 
-      expect(const ListEquality<StructureElement>().equals(structure, expectedStructure), true);
+      expect(const ListEquality<TemplateElement>().equals(structure, expectedStructure), true);
     });
 
     test('can read in file structure config', () async {
-      final fileTemplate = StructureTemplate(source: FileConfig(path: 'lib/core/template/file/sample_config.yaml'));
+      final fileTemplate = Template(source: FileConfig(path: 'lib/core/template/file/sample_config.yaml'));
 
       final structure = await fileTemplate.structure;
 
       final expectedStructure = kBlocInMemoryConfig;
 
-      expect(const ListEquality<StructureElement>().equals(structure, expectedStructure), true);
+      expect(const ListEquality<TemplateElement>().equals(structure, expectedStructure), true);
     });
 
     //todo: implement once [WebConfig] completed.
@@ -89,7 +89,7 @@ void main() {
   });
 
   group('Test template generator', () {
-    final fileTemplate = StructureTemplate(source: FileConfig(path: 'lib/core/template/file/sample_config.yaml'));
+    final fileTemplate = Template(source: FileConfig(path: 'lib/core/template/file/sample_config.yaml'));
 
     test(('generate template from FileConfig'), () {
       TemplateGenerator(template: fileTemplate).generateStructure();
