@@ -106,6 +106,14 @@
       <option name="testName" value="can read in memory structure config" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Dart Command Line App.Dart App" />
+      <item itemvalue="Dart Test.can execute successfully with incorrectly provided background in case AndroidManifest.xml is not provided in cli_test.dart" />
+      <item itemvalue="Dart Test.can read in file structure config in cli_test.dart" />
+      <item itemvalue="Dart Test.can read in memory structure config in cli_test.dart" />
+      <item itemvalue="Dart Test.Test template generator in cli_test.dart" />
+      <item itemvalue="Dart Test.Tests in cli_test.dart" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Dart Test.Test template generator in cli_test.dart" />

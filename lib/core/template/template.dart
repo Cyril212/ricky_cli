@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:ricky_cli/core/template/config/specitifactions/template_specification.dart';
 import 'package:ricky_cli/core/template/snippet/policy/base_snippet_policy.dart';
-import 'package:ricky_cli/core/template/snippet/policy/bloc/utils/logger_snippet.dart';
+import 'package:ricky_cli/core/template/snippet/policy/bloc/utils/logger_snippet_policy.dart';
 
 import 'config/template_config.dart';
 import 'snippet/policy/bloc/constants/constants_snippet_policy.dart';
