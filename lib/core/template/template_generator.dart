@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:ricky_cli/core/template/template.dart';
 
 class TemplateGenerator {
