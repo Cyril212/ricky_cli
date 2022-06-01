@@ -17,7 +17,7 @@ Lightwight CLI created to simplify early development stage for Flutter developer
 ## 🚀 Features
 - Generate Splash screen 
 - Generate Launcher Icon
-- Create project with predefined architecure by templates. (In progress)
+- Create project with predefined architecure by templates.
 
 ## 🔨 Usage
 ```dart
@@ -34,9 +34,9 @@ Usage:
 ricky_cli [command...]
 
 Commands: 
-splash - Generate native splash screen
-launcher_icon - Generate app icons
-create - Create new Flutter project
-help - List of commands
+*splash - Generate native splash screen
+*launcher_icon - Generate app icons
+*create - Create new Flutter project
+*help - List of commands
 
 ```
